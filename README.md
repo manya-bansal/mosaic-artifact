@@ -24,11 +24,11 @@ To add additional external functions to Mosaic, users need to define a header fi
 
 Consider the [```cblas_saxpy```](https://www.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top/blas-and-sparse-blas-routines/blas-routines/blas-level-1-routines-and-functions/cblas-axpy.html#cblas-axpy) function. The ```cblas_saxpy``` function computes the sum of a vector-scalar product and another vector, and has the interface:
 
-<p style="text-align: center;">```void cblas_saxpy (const MKL_INT n, const float a, const float *x, const MKL_INT incx, float *y, const MKL_INT incy);```</p>
+<p align="center" width="100%">```void cblas_saxpy (const MKL_INT n, const float a, const float *x, const MKL_INT incx, float *y, const MKL_INT incy);```<\p>
 
-In einsum notation, the semantics of the ```cblas_saxpy``` are given by:
+For simplicity, we only consider the case where our scaler is 1 i.e. ```cblas_saxpy``` computes the sum of two vectors. In einsum notation, the semantics of the ```cblas_saxpy``` are given by:
 
-<p style="text-align: center;">```X(i) = a * X(i) + Y(i)```</p>
+```X(i) = a * X(i) + Y(i)```
 
 
 
