@@ -31,12 +31,12 @@ For simplicity, we only consider the case where our scaler is 1 i.e. ```cblas_sa
 
 The arguments to the ```cblas_saxpy``` function are given by:
 
-    1. ```const MKL_INT n```: Length of ```X```, which must be equal to ```Y```.
-    2. ```const float a```: Scalar to multiply vector, in our case 1.
-    3. ```const float *x``: Pointer to storage of ```X```.
-    4. ```const MKL_INT incx``: Stride to access next element of ```X```.
-    5. ```const float *y``: Pointer to storage of ```Y```.
-    6. ```const MKL_INT incy``: Stride to access next element of ```Y```.
+1. ```const MKL_INT n```: Length of ```X```, which must be equal to ```Y```.
+2. ```const float a```: Scalar to multiply vector, in our case 1.
+3. ```const float *x``: Pointer to storage of ```X```.
+4. ```const MKL_INT incx``: Stride to access next element of ```X```.
+5. ```const float *y``: Pointer to storage of ```Y```.
+6. ```const MKL_INT incy``: Stride to access next element of ```Y```.
 
 
 ### Scheduling a call to cblas_saxpy.
