@@ -1,0 +1,3 @@
+[submodule "mosaic"]
+	path = mosaic
+	url = https://github.com/manya-bansal/mosaic.git
