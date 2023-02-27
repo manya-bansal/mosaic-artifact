@@ -14,7 +14,7 @@ The Mosaic compiler extends functionally described in the [TACO](https://github.
 
 ## Validate Results
 
-## [Optional] Reusing the Artifact
+## Reusing the Artifact Beyond the Paper 
 
 Please note that all active development beyond this paper is located in the [mosaic](https://github.com/manya-bansal/mosaic) repository and not the mosaic-artifact (this) repository. The mosaic repository is already included as a submodule within this repository.
 
