@@ -20,14 +20,14 @@ Please note that all active development beyond this paper is located in the [mos
 
 ### Adding new external functions.
 
-To add additional external functions to Mosaic, users need to define a header file in ```mosaic/include/taco/accelerator_interface``` directory. To make the process of adding new external functions concrete, we walk through an example of the [CBLAS](https://www.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top/blas-and-sparse-blas-routines.html) interface.
+Each external function is included like a library with a ```.h``` file. Therefore, to add additional external functions to Mosaic, users need to define a header file. Example headers are implemented in the ```mosaic/include/taco/accelerator_interface``` directory. 
 
-Consider the [```cblas_saxpy```](https://www.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top/blas-and-sparse-blas-routines/blas-routines/blas-level-1-routines-and-functions/cblas-axpy.html#cblas-axpy) function. The ```cblas_saxpy``` function computes the sum of a vector-scalar product and another vector, and has the interface:
+To demonstrate how to plug-in new functions to Mosaic, we walk through the process of adding new external functions. To make our discussion concrete, we consider an example of the [CBLAS](https://www.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top/blas-and-sparse-blas-routines.html) library, in particular the [```cblas_saxpy```](https://www.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top/blas-and-sparse-blas-routines/blas-routines/blas-level-1-routines-and-functions/cblas-axpy.html#cblas-axpy) function. The ```cblas_saxpy``` function computes the sum of a vector-scalar product and another vector, and has the interface:
 
 ```void cblas_saxpy (const MKL_INT n, const float a, const float *x, const MKL_INT incx, float *y, const MKL_INT incy);```
 
 
-For simplicity, we only consider the case where our scaler is 1 i.e. ```cblas_saxpy``` computes the sum of two vectors. In einsum notation, the semantics of the ```cblas_saxpy``` are given by: ```Y(i) = X(i) + Y(i)```.
+For simplicity, we only consider the case where our scalar is 1 i.e. ```cblas_saxpy``` computes the sum of two vectors. In einsum notation, the semantics of the ```cblas_saxpy``` are given by: ```Y(i) = X(i) + Y(i)```.
 
 The arguments to the ```cblas_saxpy``` function are given by:
 
