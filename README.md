@@ -26,7 +26,19 @@ Consider the [```cblas_saxpy```](https://www.intel.com/content/www/us/en/develop
 
 ```void cblas_saxpy (const MKL_INT n, const float a, const float *x, const MKL_INT incx, float *y, const MKL_INT incy);```
 
-For simplicity, we only consider the case where our scaler is 1 i.e. ```cblas_saxpy``` computes the sum of two vectors. In einsum notation, the semantics of the ```cblas_saxpy``` are given by: ```X(i) = a * X(i) + Y(i)```.
+
+For simplicity, we only consider the case where our scaler is 1 i.e. ```cblas_saxpy``` computes the sum of two vectors. In einsum notation, the semantics of the ```cblas_saxpy``` are given by: ```X(i) = X(i) + Y(i)```.
+
+The arguments to the ```cblas_saxpy``` function are given by:
+
+
+### Scheduling a call to cblas_saxpy.
+
+### Calling the Automatic Mapper.
+
+### Targeting other functions.
+
+
 
 
 
