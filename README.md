@@ -50,6 +50,16 @@ Now, to define the interface, first we must inherit form a
 
 ### Targeting other functions.
 
+### Misc Notes for Manya: DO BEFORE SUBMITTING ARTIFACT
+
+Set flags to 
+
+```
+set(C_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -Woverloaded-virtual -pedantic-errors -Wno-deprecated")
+```
+
+Benchmark suite complains if ```-Wmissing-declarations ``` is added.
+
 
 
 
