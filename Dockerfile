@@ -26,6 +26,8 @@ SHELL ["/bin/bash", "--login", "-c"]
 
 COPY . /mosaic-artifact
 
+
+# Build the Mosaic Compiler
 WORKDIR /mosaic-artifact/mosaic
 RUN mkdir build
 
@@ -34,6 +36,12 @@ RUN cmake -DCMAKE_BUILD_TYPE='Release'\
     -DCMAKE_INSTALL_PREFIX="${HOME}"  \
     -DBENCHMARK_DOWNLOAD_DEPENDENCIES=ON  ../ 
 RUN make
+
+# Set up a directory that will store all the external systems.
+# To actually set up systems, use the scripts provided in 
+# mosaic-artifact/scripts
+RUN cd /mosaic-artifact
+RUN mkdir tensor_algebra_systems
 
 
 
