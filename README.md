@@ -8,6 +8,10 @@ The Mosaic compiler extends functionally described in the [TACO](https://github.
 
 ## Getting Started
 
+```
+git submodule update --init --recursive
+```
+
 ## Top-Level Script
 
 ## Run All Benchmarks
@@ -20,7 +24,7 @@ Please note that all active development beyond this paper is located in the [mos
 
 ### Adding new external functions.
 
-Each external function is included like a library with a ```.h``` file. Therefore, to add additional external functions to Mosaic, users need to define a header file. Example headers are implemented in the ```mosaic/include/taco/accelerator_interface``` directory. 
+Each external function is included like a library with a ```.h``` file. To add external functions to Mosaic, users need to define a class with provides both the imperitive algorithm for code generation and the semantics of the function. Example headers are implemented in the ```mosaic/include/taco/accelerator_interface``` directory.
 
 To demonstrate how to plug-in new functions to Mosaic, we walk through the process of adding new external functions. To make our discussion concrete, we consider an example of the [CBLAS](https://www.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top/blas-and-sparse-blas-routines.html) library, in particular the [```cblas_saxpy```](https://www.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top/blas-and-sparse-blas-routines/blas-routines/blas-level-1-routines-and-functions/cblas-axpy.html#cblas-axpy) function. The ```cblas_saxpy``` function computes the sum of a vector-scalar product and another vector, and has the interface:
 
