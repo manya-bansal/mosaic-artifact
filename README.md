@@ -119,22 +119,22 @@ Here, we provide pointers to places in the code that implement key functionality
 4. Key search generation and checking: ```mosaic/include/taco/accelerator_search.h``` and the corresponding implementation in ```accelerator_search.cpp``` located in the ```mosaic/src/accelerator_notation``` directory. There are also additional mathematical rewrite functions in ```index_notation.cpp```.
 5. Scheduling commands: ```mosaic/include/taco/index_notation.h``` and the corresponding implementation in ```index_notation.cpp``` located in the ```mosaic/src/index_notation``` directory.
 
-## Downloading External Functions
+## Downloading CPU External Functions
 
-We provide a list of external functions and which machines they are compatible with. We also provide scripts to download and build each library. We also note any performance-related quirks related to some functions (for example, the tuning time of ATLAS).
+We provide a list of external functions that can be downloaded on a CPU and which machines they are compatible with. We also provide scripts to download and build each library. We also note any performance-related quirks related to some functions (for example, the tuning time of ATLAS).
 
 Please note that this list may be not comprehensive and is based on our experience on an x86 machine and a Mac M1 machine. Please note that the authors are not experts on these systems; this list is simply intended to communicate known issues.
 
 
-| Library | Compatible Machines | Download Instructions | Configuration Options |
+| Library | Compatible Machines | Download Instructions | Time Taken to Complete |
 | ------ | ------ | ------ | ------ |
-| ATLAS    ||||
-| CBLAS    ||||
-| MKL      ||||
-| GSL      ||||
-| TBLIS    ||||
-| AVX      ||||
-| cuSparse ||||
+| CBLAS                   || sudo apt-get install libopenblas-dev ||
+| MKL + AVX               || sudo apt-get install libmkl-dev libmkl-avx2||
+| TBLIS                   || ./scripts/tblis_download.sh | 10 Minutes|
+| GSL + Tensor  Extension + ATLAS ||  ./scripts/gsl_download.sh | 4 minutes (GSL) + 2 minutes (Tensor Extension) + (ATLAS)|
+
+Please note that we provide the quickest build for ATLAS without any additional 
+passed in. To configure ATLAS for your machine please see the [ATLAS install information](https://math-atlas.sourceforge.net/atlas_install/node6.html). For our paper, we did provide machine metadata to the configure command.
 
 ## Misc Notes for Manya: DO BEFORE SUBMITTING ARTIFACT
 

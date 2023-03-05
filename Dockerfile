@@ -19,7 +19,10 @@ RUN apt-get update && \
         xxd \
         time \
         vim \
-        cmake
+        cmake \
+        texinfo\
+        libtool-bin\
+        bzip2
 
 # Switch shell to bash
 SHELL ["/bin/bash", "--login", "-c"]
@@ -28,6 +31,7 @@ COPY . /mosaic-artifact
 
 
 # Build the Mosaic Compiler
+RUN mkdir /temp
 WORKDIR /mosaic-artifact/mosaic
 RUN mkdir build
 
@@ -40,8 +44,13 @@ RUN make
 # Set up a directory that will store all the external systems.
 # To actually set up systems, use the scripts provided in 
 # mosaic-artifact/scripts
-RUN cd /mosaic-artifact
-RUN mkdir tensor_algebra_systems
+WORKDIR /
+RUN mkdir tensor_algebra_systems_src
+RUN mkdir tensor_algebra_systems_lib
+
+WORKDIR /scripts
+RUN chmod 777 *
+
 
 
 
