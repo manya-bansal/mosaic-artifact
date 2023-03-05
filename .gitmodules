@@ -1,6 +1,6 @@
-[submodule "mosaic"]
-	path = mosaic
-	url = https://github.com/manya-bansal/mosaic.git
 [submodule "mosaic-benchmarks"]
 	path = mosaic-benchmarks
 	url = https://github.com/tensor-compiler/mosaic-benchmarks.git
+[submodule "mosaic"]
+	path = mosaic
+	url = https://github.com/manya-bansal/mosaic.git
