@@ -113,7 +113,7 @@ To schedule a call using the automatic mapper, fist call the ```registerAccelera
 
 Here, we provide pointers to places in the code that implement key functionality:
 
-1. External Function Interface: ```mosaic/include/taco/accel_interface``.
+1. External Function Interface: ```mosaic/include/taco/accel_interface```.
 2. Code Generation to target the Z3 theorem prover:  ```mosaic/include/taco/code_gen_dynamic_order.h``` and the corresponding implementation in ```code_gen_dynamic_order.cpp``` located in the ```mosaic/src/accelerator_notation``` directory.
 3. Defintion of the function capability language, aliased as ```DynamicStmt``` in the code: ```mosaic/include/taco/accelerator-notation.h``` and corresponding implementation in ```accelerator_notation.cpp``` located in the ```taco/mosaic/src``` directory.
 4. Key search generation and checking: ```mosaic/include/taco/accelerator_search.h``` and the corresponding implementation in ```accelerator_search.cpp``` located in the ```mosaic/src/accelerator_notation``` directory. There are also additional mathematical rewrite functions in ```index_notation.cpp```.
