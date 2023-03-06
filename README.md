@@ -41,7 +41,7 @@ To run all benchmarks for all systems mentioned in the paper, in the directory `
   make
   ```
 
-If you want to run, benchmarks for a particular figure, run:
+If you want to specify which benchmarks to run for a particular figure, you can use:
 
   ```
   make fig<#>
@@ -49,7 +49,7 @@ If you want to run, benchmarks for a particular figure, run:
 
 For example, if you want to make fig13, you will run ```make fig13```.
 
-We estimate time to run each benchmark:
+Breakdown of time to run each benchmark:
 
 | Figure # | Expression | Time Taken |
 ------
