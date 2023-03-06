@@ -34,7 +34,7 @@ The following instructions only apply if you are not working on our AWS machine.
 - Download the external functions that can be run on your machine. Refer to the[Downloading External Functions](#-downloading-external-functions) section to learn more about which machines the libraries can be run on and how to download these functions with our provided scripts.
 
 ## Top-Level Script
-# [5 human minutes + compute hours]
+### [5 human minutes + compute hours]
 
 To run all benchmarks for all systems mentioned in the paper, in the directory ```mosaic/bench/benchmarks/bench-scripts/``` run:
 
