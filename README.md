@@ -52,7 +52,7 @@ For example, if you want to make fig13, you will run ```make fig13```.
 Breakdown of time to run each benchmark:
 
 | Figure # | Expression | Time Taken |
-------
+| ------ | ----- | ----- |
 | 13 (Page 15)| GEMV | 35 minutes |
 | 14 (Page 15)| Symmetric GEMV | 35 minutes |
 | 15 (Page 15)| SpMV | minutes |
