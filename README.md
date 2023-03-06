@@ -33,7 +33,8 @@ The following instructions only apply if you are not working on our AWS machine.
 
 - Download the external functions that can be run on your machine. Refer to the[Downloading External Functions](#-downloading-external-functions) section to learn more about which machines the libraries can be run on and how to download these functions with our provided scripts.
 
-## Top-Level Script[5 human minutes + compute hours]
+## Top-Level Script
+# [5 human minutes + compute hours]
 
 To run all benchmarks for all systems mentioned in the paper, in the directory ```mosaic/bench/benchmarks/bench-scripts/``` run:
 
@@ -51,16 +52,16 @@ For example, if you want to make fig13, you will run ```make fig13```.
 
 Breakdown of time to run each benchmark:
 
-| Figure # | Expression | Time Taken |
-| ------ | ----- | ----- |
-| 13 (Page 15)| GEMV | 35 minutes |
-| 14 (Page 15)| Symmetric GEMV | 35 minutes |
-| 15 (Page 15)| SpMV | minutes |
-| 16 (Page 17)| SDDMM with varying sparsity | minutes |
-| 17 (Page 17)| Block Sparse: 5% non-zeros | minutes |
-| 18 (Page 17)| SpMMAdd | minutes |
-| 19 (Page 17)| SDDMM with varying dim | minutes |
-| 20 (Page 17)| Block Sparse: 20% non-zeros | minutes |
+  | Figure # | Expression | Time Taken |
+  | ------ | ----- | ----- |
+  | 13 (Page 15)| GEMV | 35 minutes |
+  | 14 (Page 15)| Symmetric GEMV | 35 minutes |
+  | 15 (Page 15)| SpMV | minutes |
+  | 16 (Page 17)| SDDMM with varying sparsity | minutes |
+  | 17 (Page 17)| Block Sparse: 5% non-zeros | minutes |
+  | 18 (Page 17)| SpMMAdd | minutes |
+  | 19 (Page 17)| SDDMM with varying dim | minutes |
+  | 20 (Page 17)| Block Sparse: 20% non-zeros | minutes |
 
 **However, if you are on your local machine, and not on the AWS machine, you can only run benchmarks that are compatible for your system. In this case, you will need to specify which external functions can be target.** 
 
