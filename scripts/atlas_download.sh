@@ -21,4 +21,4 @@ rm -rf atlas3.10.3.tar.bz2
 cd atlas
 mkdir build
 cd build
-../configure --prefix=$TENSOR_ALGEBRA_LIB/atlas && make && make install
+../configure --shared --prefix=$TENSOR_ALGEBRA_LIB/atlas && make && make install

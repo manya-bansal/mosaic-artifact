@@ -23,5 +23,6 @@ cd gsl-2.7.1
 # Step 3: Download the tensor extension
 ./gsl_tensor_download.sh
 
-# Step 4: Download ATLAS (quick configure)
-./atlas_download.sh
+# Step 4: Download ATLAS (long configure)
+# Uncomment the following line to run long configure atlas
+# ./atlas_download.sh
