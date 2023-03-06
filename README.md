@@ -153,15 +153,15 @@ Here, we provide pointers to places in the code that implement key functionality
 
 We provide a list of external functions that can be downloaded on a CPU and which machines they are compatible with. We also provide scripts to download and build each library. We also note any performance-related quirks related to some functions (for example, the tuning time of ATLAS).
 
-Please note that this list may be not comprehensive and is based on our experience on an x86 machine and a Mac M1 machine. Please note that the authors are not experts on these systems; this list is simply intended to communicate known issues.
+We provide a list of known issues. Please note that this list may be not comprehensive and is based on our experience. The authors are not experts on these external systems.
 
 
-| Library | Compatible Machines | Download Instructions | Time Taken to Complete |
+| Library | Known Issues | Download Instructions | Time Taken to Complete |
 | ------ | ------ | ------ | ------ |
-| CBLAS                   || sudo apt-get install libopenblas-dev ||
-| MKL + AVX               || sudo apt-get install libmkl-dev libmkl-avx2||
-| TBLIS                   || ./scripts/tblis_download.sh | 20 Minutes|
-| GSL + Tensor  Extension + (optional ~8 hours ATLAS) ||  ./scripts/gsl_download.sh | 4 minutes (GSL) + 2 minutes (Tensor Extension) + (ATLAS)|
+| CBLAS                   || Done in Dockerfile ||
+| MKL + AVX               || Done in Dockerfile ```sudo apt-get install libmkl-dev libmkl-avx2``` ||
+| TBLIS                   | Could not successfully download on Apple M1 | ```./scripts/tblis_download.sh``` | 20 Minutes|
+| GSL + Tensor  Extension + (optional) ATLAS || ```./scripts/gsl_download.sh``` | 4 minutes (GSL) + 2 minutes (Tensor Extension) + (optional ~8 hours ATLAS)|
 
 Please note that we provide the quickest build for ATLAS without any additional 
 passed in using sudo apt-install. We provide an ```atlas_download.sh``` script that can be used to link against the tuned version. To run this and download gsl again, uncomment the ```./atlas_download.sh``` line in ```./gsl_download.sh```.

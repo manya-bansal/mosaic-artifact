@@ -22,7 +22,16 @@ RUN apt-get update && \
         cmake \
         texinfo\
         libtool-bin\
-        bzip2
+        bzip2\
+        # download intel mkl
+        libmkl-dev\ 
+        libmkl-avx2\
+        # download openblas
+        libopenblas-dev\
+        # download atlas
+        libatlas-base-dev
+
+
 
 # Switch shell to bash
 SHELL ["/bin/bash", "--login", "-c"]
@@ -44,9 +53,8 @@ RUN make
 # Set up a directory that will store all the external systems.
 # To actually set up systems, use the scripts provided in 
 # mosaic-artifact/scripts
-WORKDIR /
+WORKDIR /mosaic-artifact
 RUN mkdir tensor_algebra_systems_src
-RUN mkdir tensor_algebra_systems_lib
 
 WORKDIR /scripts
 RUN chmod 777 *
