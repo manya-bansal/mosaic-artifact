@@ -8,17 +8,17 @@ The Mosaic compiler extends functionally described in the [TACO](https://github.
 
 ## Getting Started
 
-**For artifact evaluation, we highly recommend reviewers to use the provided login to our AWS instance. This machine has access to the GPU used in the paper. and we have pre-built all external software libraries. If you are logged onto the machine, please skip to the [Top-Level Script](#top-level-script) section.**
+**For artifact evaluation, we highly recommend reviewers to use the provided login to our AWS instance. This machine has access to the GPU used in the paper and we have pre-built all external software libraries. If you are logged onto the machine, please skip to the [Top-Level Script](#top-level-script) section.**
 
 The following instructions only apply if you are not working on our AWS machine.
 
 - Download this repository and run the following commands to build and attach a docker image from the provided Dockerfile.
 
-```
-git clone <link to this repo>
-git submodule update --init --recursive
-docker build -t mosaic-artifact .
-```
+  ```
+  git clone <link to this repo>
+  git submodule update --init --recursive
+  docker build -t mosaic-artifact .
+  ```
 
 - Once the image is built, run a docker container with a bash terminal
   ```
@@ -29,7 +29,7 @@ docker build -t mosaic-artifact .
   docker attach <CONTAINER_ID>
   ```
 
-*Note:* Do not type `exit` in the docker terminal as this will kill the container. The proper way to exit the docker is the sequence `CTRL-p, CTRL-q`.
+  *Note:* Do not type `exit` in the docker terminal as this will kill the container. The proper way to exit the docker is the sequence `CTRL-p, CTRL-q`.
 
 - Download the external functions that can be run on your machine. Refer to the[Downloading External Functions](#-downloading-external-functions) section to learn more about which machines the libraries can be run on and how to download these functions with our provided scripts.
 
@@ -146,7 +146,9 @@ set(C_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initiali
 
 Benchmark suite complains if ```-Wmissing-declarations ``` is added.
 
-Make sure line numbers of code match if changes have been made to the Mosaic code base + double check that the locations match. 
+Make sure line numbers of code match if changes have been made to the Mosaic code base + double check that the locations match.
+
+Remove any git identification info from reviewer aws machine.
 
 
 
