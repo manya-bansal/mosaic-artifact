@@ -6,16 +6,24 @@ Repository for Mosaic artifact generation.
 
 The Mosaic compiler extends functionally described in the [TACO](https://github.com/tensor-compiler/taco) compiler and is built on top of TACO's implementation.
 
-## Getting Started with AWS
+## Getting Started Guide
+
+### Getting Started with AWS
 
 **For artifact evaluation, we highly recommend reviewers to use the provided
 login to our AWS instance. This machine has access to the GPU used in the paper
 and we have pre-built all external software libraries.**
 
-If you would like to run this artifact using Docker, please refer to [these instructions](docker.md)
+If a non-reviewer would like to run this artifact using Docker, please refer to [these instructions](docker.md)
 
-## Top-Level Script
-### [5 human minutes + compute hours]
+## Kick-the-Tires Test
+```
+make kick-the-tires
+```
+
+## Step-by-Step Instructions
+
+## Top-Level Script [5 human minutes + compute hours]
 
 To run all benchmarks for all systems mentioned in the paper, in the directory ```mosaic/bench/benchmarks/bench-scripts/``` run:
 
@@ -51,11 +59,21 @@ Breakdown of time to run each benchmark:
   | 20 (Page 17)| Block Sparse: 20% non-zeros | minutes |
   | 21 (Page 17)| TTV | 3 minutes |
 
-**However, if you are on your local machine, and not on the AWS machine, you can only run benchmarks that are compatible for your system. In this case, you will need to specify which external functions can be target.** 
 
-To specify which functions to target:
+## Running Stardust [XX human-minutes + XX compute-minutes]
+We have already provided the numbers for running the SpMV (figure 15 on page 15) and SpMMAdd (figure 18 on page 17)
+kernels on the Capstan hardware using the Stardust compiler (orange y's) in FIXME: `spmv_plus2.csv`. However, we provide a script to regenerate this csv from the Capstan cycle-accurate simulator tungsten. To regenerate the CSV, run the following script:
+```
+```
 
-## Validate Results
+Then rerun the following commands to make and draw figures 15 and 18: 
+```
+make run-fig15 && make draw-fig15
+```
+```
+make run-fig18 && make draw-fig18
+```
+### Validate Results
 
 ## Reusing the Artifact Beyond the Paper 
 
