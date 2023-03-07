@@ -22,12 +22,14 @@ The following instructions only apply if you are not working on our AWS machine.
 
   *Note:* Do not type `exit` in the docker terminal as this will kill the container. The proper way to exit the docker is the sequence `CTRL-p, CTRL-q`.
 
-- Download the external functions that can be run on your machine. Refer to the [Downloading External Functions](#-downloading-external-functions) section to learn more about which machines each library can be run on and how to download these functions with our provided scripts.
+- Download the external functions that can be run on your machine. Refer to the [Downloading External Functions](#downloading-external-functions) section to learn more about which machines each library can be run on and how to download these functions with our provided scripts.
 
 ## Running the Artifact
 Continue on to the [Top-Level Script](README.md#top-level-script) Section in the `README.md`
+
+## Downloading External Functions
  
-## Downloading CPU External Functions
+### CPU External Functions
 
 We provide a list of external functions that can be downloaded on a CPU and which machines they are compatible with. We also provide scripts to download and build each library. We also note any performance-related quirks related to some functions (for example, the tuning time of ATLAS).
 
