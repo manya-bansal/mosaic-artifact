@@ -45,10 +45,16 @@ To run all benchmarks for all systems mentioned in the paper, in the directory `
 If you want to specify which benchmarks to run for a particular figure, you can use:
 
   ```
-  make fig<#>
+  make run-fig<#>
   ```
 
-For example, if you want to make fig13, you will run ```make fig13```.
+To make a specific figure (assuming the data has been generated using the previous command), run:
+
+  ```
+  make draw-fig<#>
+  ```
+
+For example, if you want to run and draw fig13, you will run ```make run-fig13 && make draw-fig13```.
 
 Breakdown of time to run each benchmark:
 
@@ -56,12 +62,13 @@ Breakdown of time to run each benchmark:
   | ------ | ----- | ----- |
   | 13 (Page 15)| GEMV | 35 minutes |
   | 14 (Page 15)| Symmetric GEMV | 35 minutes |
-  | 15 (Page 15)| SpMV | minutes |
-  | 16 (Page 17)| SDDMM with varying sparsity | minutes |
+  | 15 (Page 15)| SpMV | 45 minutes |
+  | 16 (Page 17)| SDDMM with varying sparsity | 1 hour 10 minutes |
   | 17 (Page 17)| Block Sparse: 5% non-zeros | minutes |
-  | 18 (Page 17)| SpMMAdd | minutes |
+  | 18 (Page 17)| SpMMAdd | 2 minutes |
   | 19 (Page 17)| SDDMM with varying dim | minutes |
   | 20 (Page 17)| Block Sparse: 20% non-zeros | minutes |
+  | 21 (Page 17)| TTV | 3 minutes |
 
 **However, if you are on your local machine, and not on the AWS machine, you can only run benchmarks that are compatible for your system. In this case, you will need to specify which external functions can be target.** 
 
