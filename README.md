@@ -6,32 +6,13 @@ Repository for Mosaic artifact generation.
 
 The Mosaic compiler extends functionally described in the [TACO](https://github.com/tensor-compiler/taco) compiler and is built on top of TACO's implementation.
 
-## Getting Started
+## Getting Started with AWS
 
-**For artifact evaluation, we highly recommend reviewers to use the provided login to our AWS instance. This machine has access to the GPU used in the paper and we have pre-built all external software libraries. If you are logged onto the machine, please skip to the [Top-Level Script](#top-level-script) section.**
+**For artifact evaluation, we highly recommend reviewers to use the provided
+login to our AWS instance. This machine has access to the GPU used in the paper
+and we have pre-built all external software libraries.**
 
-The following instructions only apply if you are not working on our AWS machine.
-
-- Download this repository and run the following commands to build and attach a docker image from the provided Dockerfile.
-
-  ```
-  git clone <link to this repo>
-  git submodule update --init --recursive
-  docker build -t mosaic-artifact .
-  ```
-
-- Once the image is built, run a docker container with a bash terminal
-  ```
-  docker run -d -it --rm mosaic-artifact bash
-  ```
-- The above command should print out a `CONTAINER_ID`. Attach to the docker   container using the command below and the `CONTAINER_ID` from the previous step.
-  ```
-  docker attach <CONTAINER_ID>
-  ```
-
-  *Note:* Do not type `exit` in the docker terminal as this will kill the container. The proper way to exit the docker is the sequence `CTRL-p, CTRL-q`.
-
-- Download the external functions that can be run on your machine. Refer to the[Downloading External Functions](#-downloading-external-functions) section to learn more about which machines the libraries can be run on and how to download these functions with our provided scripts.
+If you would like to run this artifact using Docker, please refer to [these instructions](docker.md)
 
 ## Top-Level Script
 ### [5 human minutes + compute hours]
@@ -157,22 +138,6 @@ Here, we provide pointers to places in the code that implement key functionality
 4. Key search generation and checking: ```mosaic/include/taco/accelerator_search.h``` and the corresponding implementation in ```accelerator_search.cpp``` located in the ```mosaic/src/accelerator_notation``` directory. There are also additional mathematical rewrite functions in ```index_notation.cpp```.
 5. Scheduling commands: ```mosaic/include/taco/index_notation.h``` and the corresponding implementation in ```index_notation.cpp``` located in the ```mosaic/src/index_notation``` directory.
 
-## Downloading CPU External Functions
-
-We provide a list of external functions that can be downloaded on a CPU and which machines they are compatible with. We also provide scripts to download and build each library. We also note any performance-related quirks related to some functions (for example, the tuning time of ATLAS).
-
-We provide a list of known issues. Please note that this list may be not comprehensive and is based on our experience. The authors are not experts on these external systems.
-
-
-| Library | Known Issues | Download Instructions | Time Taken to Complete |
-| ------ | ------ | ------ | ------ |
-| CBLAS                   || Done in Dockerfile ||
-| MKL + AVX               || Done in Dockerfile ```sudo apt-get install libmkl-dev libmkl-avx2``` ||
-| TBLIS                   | Could not successfully download on Apple M1 | ```./scripts/tblis_download.sh``` | 20 Minutes|
-| GSL + Tensor  Extension + (optional) ATLAS || ```./scripts/gsl_download.sh``` | 4 minutes (GSL) + 2 minutes (Tensor Extension) + (optional ~8 hours ATLAS)|
-
-Please note that we provide the quickest build for ATLAS without any additional 
-passed in using sudo apt-install. We provide an ```atlas_download.sh``` script that can be used to link against the tuned version. To run this and download gsl again, uncomment the ```./atlas_download.sh``` line in ```./gsl_download.sh```.
 
 ## Misc Notes for Manya: DO BEFORE SUBMITTING ARTIFACT
 
