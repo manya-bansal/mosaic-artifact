@@ -16,14 +16,14 @@ and we have pre-built all external software libraries.**
 
 If a non-reviewer would like to run this artifact using Docker, please refer to [these instructions](docker.md)
 
-## Kick-the-Tires Test
+### Kick-the-Tires Test
 ```
 make kick-the-tires
 ```
 
 ## Step-by-Step Instructions
 
-## Top-Level Script [5 human minutes + compute hours]
+### Top-Level Script [5 human minutes + compute hours]
 
 To run all benchmarks for all systems mentioned in the paper, in the directory ```mosaic/bench/benchmarks/bench-scripts/``` run:
 
@@ -61,7 +61,7 @@ Breakdown of time to run each benchmark:
   | 22 (Page 18)| Compute Capability Language | 1 minute |
 
 
-## Running Stardust [XX human-minutes + XX compute-minutes]
+### Running Stardust (Optional) [XX human-minutes + XX compute-minutes]
 We have already provided the numbers for running the SpMV (figure 15 on page 15) and SpMMAdd (figure 18 on page 17)
 kernels on the Capstan hardware using the Stardust compiler (orange y's) in FIXME: `spmv_plus2.csv`. However, we provide a script to regenerate this csv from the Capstan cycle-accurate simulator tungsten. To regenerate the CSV, run the following script:
 ```
@@ -74,6 +74,7 @@ make run-fig15 && make draw-fig15
 ```
 make run-fig18 && make draw-fig18
 ```
+
 ### Validate Results
 
 ## Reusing the Artifact Beyond the Paper 
@@ -138,7 +139,7 @@ bool checkerFunction(IndexStmt stmt) const override{return true;}
 
 *To see a more complicated example, refer to the ```tblis_interface.h```*. Here, one can note the ```callBefore``` and ```callAfter``` functionality in action. One can also see how library-specific objects can be used as arguments through the use of ```DeclVar```.
 
-### Scheduling a call to cblas_saxpy.
+### Scheduling a call to cblas\_saxpy.
 
 To ```map``` or  ```bind``` a call to the ```Saxpy``` functions, use the ```accelerate``` (aliased) scheduling command. Note that the ```accelerate``` command is overloaded to provide the functionality of both the ```bind``` and ```map``` . The ```bind``` functionality is implicitly included because we do not overwrite previously applied scheduling command.
 
