@@ -47,17 +47,18 @@ For example, if you want to run and draw fig13, you will run ```make run-fig13 &
 
 Breakdown of time to run each benchmark:
 
-  | Figure # | Expression | Time Taken |
+  | Figure # | Benchmark | Time Taken |
   | ------ | ----- | ----- |
   | 13 (Page 15)| GEMV | 35 minutes |
   | 14 (Page 15)| Symmetric GEMV | 35 minutes |
   | 15 (Page 15)| SpMV | 45 minutes |
-  | 16 (Page 17)| SDDMM with varying sparsity | 1 hour 10 minutes |
+  | 16 (Page 17)| SDDMM with varying sparsity | |
   | 17 (Page 17)| Block Sparse: 5% non-zeros | minutes |
   | 18 (Page 17)| SpMMAdd | 2 minutes |
-  | 19 (Page 17)| SDDMM with varying dim | minutes |
+  | 19 (Page 17)| SDDMM with varying dim | 3 hours 20 minutes |
   | 20 (Page 17)| Block Sparse: 20% non-zeros | minutes |
   | 21 (Page 17)| TTV | 3 minutes |
+  | 22 (Page 18)| Compute Capability Language | 1 minute |
 
 
 ## Running Stardust [XX human-minutes + XX compute-minutes]
