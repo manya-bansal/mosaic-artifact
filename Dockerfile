@@ -33,11 +33,14 @@ SHELL ["/bin/bash", "--login", "-c"]
 
 COPY . /mosaic-artifact
 
-
 # Build the Mosaic Compiler
 RUN mkdir /temp
 WORKDIR /mosaic-artifact/mosaic
 RUN mkdir build
+
+WORKDIR /mosaic-artifact/scripts
+RUN chmod 777 *
+RUN ./tblis_download.sh
 
 WORKDIR /mosaic-artifact/mosaic/build
 RUN cmake -DCMAKE_BUILD_TYPE='Release'\
@@ -51,9 +54,7 @@ RUN make
 WORKDIR /mosaic-artifact
 RUN mkdir tensor_algebra_systems_src
 
-WORKDIR /scripts
-RUN chmod 777 *
-RUN ./tblis_download.sh
+
 
 
 
