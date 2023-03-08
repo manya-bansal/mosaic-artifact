@@ -1,5 +1,5 @@
 #!/bin/zsh
-export PATH_TO_MOSAIC_ARTIFACT=
+export PATH_TO_MOSAIC_ARTIFACT=/mosaic-artifact/
                     # Example including tblis in path.
 export INCLUDE_PATH=" -I$PATH_TO_MOSAIC_ARTIFACT/tensor_algebra_systems_lib/ -I$PATH_TO_MOSAIC_ARTIFACT/tensor_algebra_systems_lib/tblis/include \
 -I$PATH_TO_MOSAIC_ARTIFACT/tensor_algebra_systems_lib/tblis/include/tblis"

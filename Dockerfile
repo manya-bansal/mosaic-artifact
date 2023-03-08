@@ -22,14 +22,7 @@ RUN apt-get update && \
         cmake \
         texinfo\
         libtool-bin\
-        bzip2\
-        # download intel mkl
-        libmkl-dev\ 
-        libmkl-avx2\
-        # download openblas
-        libopenblas-dev\
-        # download atlas
-        libatlas-base-dev
+        bzip2
 
 
 
@@ -58,7 +51,7 @@ RUN mkdir tensor_algebra_systems_src
 
 WORKDIR /scripts
 RUN chmod 777 *
-
+RUN ./tblis_download.sh
 
 
 
