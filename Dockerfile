@@ -22,7 +22,9 @@ RUN apt-get update && \
         cmake \
         texinfo\
         libtool-bin\
-        bzip2
+        bzip2 \
+        && \
+        pip install numpy scipy pandas
 
 
 
@@ -37,7 +39,7 @@ RUN mkdir /temp
 WORKDIR /mosaic-artifact/mosaic
 RUN mkdir build
 
-WORKDIR /mosaic-artifact/mosaic/build 
+WORKDIR /mosaic-artifact/mosaic/build
 RUN cmake -DCMAKE_BUILD_TYPE='Release'\
     -DCMAKE_INSTALL_PREFIX="${HOME}"  \
     -DBENCHMARK_DOWNLOAD_DEPENDENCIES=ON  ../ 
