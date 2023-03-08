@@ -6,35 +6,29 @@ Repository for Mosaic artifact generation.
 
 The Mosaic compiler extends functionally described in the [TACO](https://github.com/tensor-compiler/taco) compiler and is built on top of TACO's implementation.
 
-## Getting Started
+## Getting Started Guide
 
-**For artifact evaluation, we highly recommend reviewers to use the provided login to our AWS instance. This machine has access to the GPU used in the paper and we have pre-built all external software libraries. If you are logged onto the machine, please skip to the [Top-Level Script](#top-level-script) section.**
+### Getting Started with AWS
 
-The following instructions only apply if you are not working on our AWS machine.
+**For artifact evaluation, we highly recommend reviewers to use the provided
+login to our AWS instance. This machine has access to the GPU used in the paper
+and we have pre-built all external software libraries.**
 
-- Download this repository and run the following commands to build and attach a docker image from the provided Dockerfile.
+TODO: 
+```
+```
 
-  ```
-  git clone <link to this repo>
-  git submodule update --init --recursive
-  docker build -t mosaic-artifact .
-  ```
+If a non-reviewer would like to run this artifact using Docker, please refer to [these instructions](docker.md)
 
-- Once the image is built, run a docker container with a bash terminal
-  ```
-  docker run -d -it --rm mosaic-artifact bash
-  ```
-- The above command should print out a `CONTAINER_ID`. Attach to the docker   container using the command below and the `CONTAINER_ID` from the previous step.
-  ```
-  docker attach <CONTAINER_ID>
-  ```
+### Kick-the-Tires Test
+```
+cd mosaic/bench/benchmarks/bench-scripts/
+make kick-the-tires
+```
 
-  *Note:* Do not type `exit` in the docker terminal as this will kill the container. The proper way to exit the docker is the sequence `CTRL-p, CTRL-q`.
+## Step-by-Step Instructions
 
-- Download the external functions that can be run on your machine. Refer to the[Downloading External Functions](#-downloading-external-functions) section to learn more about which machines the libraries can be run on and how to download these functions with our provided scripts.
-
-## Top-Level Script
-### [5 human minutes + compute hours]
+### Top-Level Script [5 human minutes + compute hours]
 
 To run all benchmarks for all systems mentioned in the paper, in the directory ```mosaic/bench/benchmarks/bench-scripts/``` run:
 
@@ -45,35 +39,62 @@ To run all benchmarks for all systems mentioned in the paper, in the directory `
 If you want to specify which benchmarks to run for a particular figure, you can use:
 
   ```
-  make fig<#>
+  make run-fig<#>
   ```
 
-For example, if you want to make fig13, you will run ```make fig13```.
+To make a specific figure (assuming the data has been generated using the previous command), run:
+
+  ```
+  make draw-fig<#>
+  ```
+
+For example, if you want to run and draw fig13, you will run ```make run-fig13 && make draw-fig13```.
 
 Breakdown of time to run each benchmark:
 
-  | Figure # | Expression | Time Taken |
+  | Figure # | Benchmark | Time Taken |
   | ------ | ----- | ----- |
   | 13 (Page 15)| GEMV | 35 minutes |
   | 14 (Page 15)| Symmetric GEMV | 35 minutes |
-  | 15 (Page 15)| SpMV | minutes |
-  | 16 (Page 17)| SDDMM with varying sparsity | minutes |
+  | 15 (Page 15)| SpMV | 45 minutes |
+  | 16 (Page 17)| SDDMM with varying sparsity | |
   | 17 (Page 17)| Block Sparse: 5% non-zeros | minutes |
-  | 18 (Page 17)| SpMMAdd | minutes |
-  | 19 (Page 17)| SDDMM with varying dim | minutes |
+  | 18 (Page 17)| SpMMAdd | 2 minutes |
+  | 19 (Page 17)| SDDMM with varying dim | 3 hours 20 minutes |
   | 20 (Page 17)| Block Sparse: 20% non-zeros | minutes |
+  | 21 (Page 17)| TTV | 3 minutes |
+  | 22 (Page 18)| Compute Capability Language | 1 minute |
 
-**However, if you are on your local machine, and not on the AWS machine, you can only run benchmarks that are compatible for your system. In this case, you will need to specify which external functions can be target.** 
 
-To specify which functions to target:
+### Running Stardust (Optional) [XX human-minutes + 120 compute-minutes]
+We have already provided the numbers for running the SpMV (figure 15 on page 15) and SpMMAdd (figure 18 on page 17)
+kernels on the Capstan hardware using the Stardust compiler (orange y's) in
+FIXME: `spmv_plus2.csv`. However, we provide a script to regenerate this csv
+from the Capstan cycle-accurate simulator tungsten. To regenerate the CSV,
+follow the following steps.
 
-## Validate Results
+Again in the directory ```mosaic/bench/benchmarks/bench-scripts/``` run:
+```
+make stardust-csv
+```
+
+Then rerun the following commands to make and draw figures 15 and 18: 
+```
+make run-fig15 && make draw-fig15
+```
+```
+make run-fig18 && make draw-fig18
+```
+
+### Validate Results
+
+
 
 ## Reusing the Artifact Beyond the Paper 
 
-Please note that all active development beyond this paper is located in the [mosaic](https://github.com/manya-bansal/mosaic) repository and not the mosaic-artifact (this) repository. The mosaic repository is already included as a submodule within this repository.
+Please note that all active development beyond this paper is located in the [mosaic](https://github.com/manya-bansal/mosaic) repository and not the [mosaic-artifact](https://github.com/manya-bansal/mosaic-artifact) (this) repository. The mosaic repository is already included as a submodule within this repository.
 
-### Adding new external functions.
+### Adding New External Functions
 
 Each external function is included like a library with a ```.h``` file. To add external functions to Mosaic, users need to define a class with provides both the imperitive algorithm for code generation and the semantics of the function. Example headers are implemented in the ```mosaic/include/taco/accelerator_interface``` directory.
 
@@ -131,7 +152,7 @@ bool checkerFunction(IndexStmt stmt) const override{return true;}
 
 *To see a more complicated example, refer to the ```tblis_interface.h```*. Here, one can note the ```callBefore``` and ```callAfter``` functionality in action. One can also see how library-specific objects can be used as arguments through the use of ```DeclVar```.
 
-### Scheduling a call to cblas_saxpy.
+### Scheduling a Call to cblas\_saxpy
 
 To ```map``` or  ```bind``` a call to the ```Saxpy``` functions, use the ```accelerate``` (aliased) scheduling command. Note that the ```accelerate``` command is overloaded to provide the functionality of both the ```bind``` and ```map``` . The ```bind``` functionality is implicitly included because we do not overwrite previously applied scheduling command.
 
@@ -139,7 +160,7 @@ To see examples of using this command, refer to ```test/tests-interface.cpp```. 
 
 To schedule a call using the automatic mapper, fist call the ```registerAccelerator``` function with a ```Saxpy```  object passed in as an argument. Next, call ```accelerateOn``` command that chooses a schedule to apply. Because our paper does not select best mapping i.e. we do not auto-tune our mappings, the ```accelerateOn``` function applies the first schedule.
 
-### Exploring the code.
+### Exploring the Code
 
 Here, we provide pointers to places in the code that implement key functionality:
 
@@ -149,22 +170,6 @@ Here, we provide pointers to places in the code that implement key functionality
 4. Key search generation and checking: ```mosaic/include/taco/accelerator_search.h``` and the corresponding implementation in ```accelerator_search.cpp``` located in the ```mosaic/src/accelerator_notation``` directory. There are also additional mathematical rewrite functions in ```index_notation.cpp```.
 5. Scheduling commands: ```mosaic/include/taco/index_notation.h``` and the corresponding implementation in ```index_notation.cpp``` located in the ```mosaic/src/index_notation``` directory.
 
-## Downloading CPU External Functions
-
-We provide a list of external functions that can be downloaded on a CPU and which machines they are compatible with. We also provide scripts to download and build each library. We also note any performance-related quirks related to some functions (for example, the tuning time of ATLAS).
-
-We provide a list of known issues. Please note that this list may be not comprehensive and is based on our experience. The authors are not experts on these external systems.
-
-
-| Library | Known Issues | Download Instructions | Time Taken to Complete |
-| ------ | ------ | ------ | ------ |
-| CBLAS                   || Done in Dockerfile ||
-| MKL + AVX               || Done in Dockerfile ```sudo apt-get install libmkl-dev libmkl-avx2``` ||
-| TBLIS                   | Could not successfully download on Apple M1 | ```./scripts/tblis_download.sh``` | 20 Minutes|
-| GSL + Tensor  Extension + (optional) ATLAS || ```./scripts/gsl_download.sh``` | 4 minutes (GSL) + 2 minutes (Tensor Extension) + (optional ~8 hours ATLAS)|
-
-Please note that we provide the quickest build for ATLAS without any additional 
-passed in using sudo apt-install. We provide an ```atlas_download.sh``` script that can be used to link against the tuned version. To run this and download gsl again, uncomment the ```./atlas_download.sh``` line in ```./gsl_download.sh```.
 
 ## Misc Notes for Manya: DO BEFORE SUBMITTING ARTIFACT
 
