@@ -99,5 +99,4 @@ void wrapper_convert(int m, taco_tensor_t * A, taco_tensor_t * B, float * C){
     free(CSR_A->indices[1][0]);
 }
 
-
 #endif

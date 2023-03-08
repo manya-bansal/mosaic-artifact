@@ -1,7 +1,4 @@
-
-TENSOR_ALGEBRA_SRC=/home/ubuntu/tensor_algebra_systems_src
-TENSOR_ALGEBRA_LIB=/home/ubuntu/tensor_algebra_systems_lib
-
+#!/bin/bash
 # Step 0: Create a tblis directory where the lib will be stored. 
 cd $TENSOR_ALGEBRA_LIB
 mkdir tblis
