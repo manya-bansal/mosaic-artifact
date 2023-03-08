@@ -38,6 +38,13 @@ RUN mkdir /temp
 WORKDIR /mosaic-artifact/mosaic
 RUN mkdir build
 
+# Set up a directory that will store all the external systems.
+# To actually set up systems, use the scripts provided in 
+# mosaic-artifact/scripts
+WORKDIR /mosaic-artifact
+RUN mkdir tensor_algebra_systems_src
+
+
 WORKDIR /mosaic-artifact/scripts
 RUN chmod 777 *
 RUN ./tblis_download.sh
@@ -48,11 +55,6 @@ RUN cmake -DCMAKE_BUILD_TYPE='Release'\
     -DBENCHMARK_DOWNLOAD_DEPENDENCIES=ON  ../ 
 RUN make
 
-# Set up a directory that will store all the external systems.
-# To actually set up systems, use the scripts provided in 
-# mosaic-artifact/scripts
-WORKDIR /mosaic-artifact
-RUN mkdir tensor_algebra_systems_src
 
 
 
