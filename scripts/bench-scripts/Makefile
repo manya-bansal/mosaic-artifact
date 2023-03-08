@@ -4,6 +4,7 @@ SHELL := /bin/bash
 all: run-tblis-tests
 
 run-tblis-tests:
+	.././tblis_download.sh
 	$(PATH_TO_MOSAIC_ARTIFACT)/mosaic/build/bin/taco-test tblis
 
 all-benchmarks: run-fig13 draw-fig13 run-fig14 draw-fig14 run-fig15 draw-fig15 \
