@@ -14,10 +14,15 @@ The Mosaic compiler extends functionally described in the [TACO](https://github.
 login to our AWS instance. This machine has access to the GPU used in the paper
 and we have pre-built all external software libraries.**
 
+TODO: 
+```
+```
+
 If a non-reviewer would like to run this artifact using Docker, please refer to [these instructions](docker.md)
 
 ### Kick-the-Tires Test
 ```
+cd mosaic/bench/benchmarks/bench-scripts/
 make kick-the-tires
 ```
 
@@ -61,10 +66,16 @@ Breakdown of time to run each benchmark:
   | 22 (Page 18)| Compute Capability Language | 1 minute |
 
 
-### Running Stardust (Optional) [XX human-minutes + XX compute-minutes]
+### Running Stardust (Optional) [XX human-minutes + 120 compute-minutes]
 We have already provided the numbers for running the SpMV (figure 15 on page 15) and SpMMAdd (figure 18 on page 17)
-kernels on the Capstan hardware using the Stardust compiler (orange y's) in FIXME: `spmv_plus2.csv`. However, we provide a script to regenerate this csv from the Capstan cycle-accurate simulator tungsten. To regenerate the CSV, run the following script:
+kernels on the Capstan hardware using the Stardust compiler (orange y's) in
+FIXME: `spmv_plus2.csv`. However, we provide a script to regenerate this csv
+from the Capstan cycle-accurate simulator tungsten. To regenerate the CSV,
+follow the following steps.
+
+Again in the directory ```mosaic/bench/benchmarks/bench-scripts/``` run:
 ```
+make stardust-csv
 ```
 
 Then rerun the following commands to make and draw figures 15 and 18: 
@@ -77,11 +88,13 @@ make run-fig18 && make draw-fig18
 
 ### Validate Results
 
+
+
 ## Reusing the Artifact Beyond the Paper 
 
-Please note that all active development beyond this paper is located in the [mosaic](https://github.com/manya-bansal/mosaic) repository and not the mosaic-artifact (this) repository. The mosaic repository is already included as a submodule within this repository.
+Please note that all active development beyond this paper is located in the [mosaic](https://github.com/manya-bansal/mosaic) repository and not the [mosaic-artifact](https://github.com/manya-bansal/mosaic-artifact) (this) repository. The mosaic repository is already included as a submodule within this repository.
 
-### Adding new external functions.
+### Adding New External Functions
 
 Each external function is included like a library with a ```.h``` file. To add external functions to Mosaic, users need to define a class with provides both the imperitive algorithm for code generation and the semantics of the function. Example headers are implemented in the ```mosaic/include/taco/accelerator_interface``` directory.
 
@@ -139,7 +152,7 @@ bool checkerFunction(IndexStmt stmt) const override{return true;}
 
 *To see a more complicated example, refer to the ```tblis_interface.h```*. Here, one can note the ```callBefore``` and ```callAfter``` functionality in action. One can also see how library-specific objects can be used as arguments through the use of ```DeclVar```.
 
-### Scheduling a call to cblas\_saxpy.
+### Scheduling a Call to cblas\_saxpy
 
 To ```map``` or  ```bind``` a call to the ```Saxpy``` functions, use the ```accelerate``` (aliased) scheduling command. Note that the ```accelerate``` command is overloaded to provide the functionality of both the ```bind``` and ```map``` . The ```bind``` functionality is implicitly included because we do not overwrite previously applied scheduling command.
 
@@ -147,7 +160,7 @@ To see examples of using this command, refer to ```test/tests-interface.cpp```. 
 
 To schedule a call using the automatic mapper, fist call the ```registerAccelerator``` function with a ```Saxpy```  object passed in as an argument. Next, call ```accelerateOn``` command that chooses a schedule to apply. Because our paper does not select best mapping i.e. we do not auto-tune our mappings, the ```accelerateOn``` function applies the first schedule.
 
-### Exploring the code.
+### Exploring the Code
 
 Here, we provide pointers to places in the code that implement key functionality:
 
