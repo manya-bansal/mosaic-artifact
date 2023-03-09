@@ -172,7 +172,7 @@ First, we define the semantic description of the functions:
 Here, ```x``` and ```y``` are of private variables of type ```TensorObject```.
 The ```TensorObject``` extends TACO tensors to support dynamic orders. To see
 an example of writing language capability statements that use dynamic tensors,
-refer to ```mosaic/test/tests-accelerate-notation.cpp```.
+refer to ```mosaic/test/test-accelerate-notation.cpp```.
 
 Next, we define the arguments of our function:
 
