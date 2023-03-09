@@ -19,8 +19,12 @@ TACO's implementation.
 login to our AWS instance. This machine has access to the GPU used in the paper
 and we pre-built all external software libraries.**
 
-We have provided login instructions to three AWS instances in the bidding
-instructions for the artifact evaluation.
+We have provided login instructions (username, password, and host) to three AWS
+instances in the bidding instructions for the artifact evaluation.
+**Please do not run benchmarks in parallel. This will
+introduce noise, and the graph output may vary. This includes multiple reviewers
+who may be running benchmarks on the same machine, therefore, we recommend one
+machine per reviewer at a time.**
 
 If a non-reviewer would like to run this artifact using Docker, please refer to
 [these instructions](DOCKER.md).
@@ -61,8 +65,9 @@ To make a specific figure (assuming the data has been generated using the previo
   make draw-fig<#>
   ```
 
-For example, if you want to run and draw fig13, you will run ```make run-fig13 && make draw-fig13```. *Please do not run benchmarks in parallel. This will introduce noise, and the graph output may vary. This includes another reviewer who may be running benchmarks on the same machine.*
-
+For example, if you want to run and draw fig13, you will run ```make run-fig13
+&& make draw-fig13```.
+ 
 We provide an estimate of how long we expect each benchmark to take:
 
   | Figure # | Benchmark | Time Taken |
@@ -118,8 +123,11 @@ To move the figures over to your local machine for viewing, please run:
   - Validate that `fig19.pdf` matches Figure 19 on page 17.
   - Validate that `fig20.pdf` matches Figure 20 on page 17.
   - Validate that `fig21.pdf` matches Figure 21 on page 17.
-  - Validate that the output of `make run-fig22` matches Table 22. Please note since this benchmark performs a random search, one can expect to see a variance of 2-4 seconds for long running searches.
+  - Validate that the output of `make run-fig22` matches Table 22. Please note since this benchmark performs a random search, one can expect to see a variance of up to 10 seconds for long running searches.
 
+We expect to see some variance (due to machine noise and machine state) in the runtimes of each figure (13-21), 
+however, this variance should be small and should not affect the
+conclusions of the figures.
 
  Note for `fig18.pdf`: While preparing the artifact, we discovered a small bug in our code which has been brought to the Artifact Evaluation Chairs. The graph that is produced draws both lines, the buggy implementation and the corrected version. 
 
