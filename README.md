@@ -87,10 +87,10 @@ We provide an estimate of how long we expect each benchmark to take:
 
 ### Running Stardust (Optional) [10 human-minutes + ~8 hours]
 We have already provided the numbers for running the SpMV (figure 15 on page 15) and SpMMAdd (figure 18 on page 17)
-kernels on the Capstan hardware using the Stardust compiler (orange lines) in
+kernels on the Capstan hardware using the [Stardust compiler](https://github.com/weiya711/taco-to-spatial) (orange lines) in
 `mosaic-benchmarks/stardust-runs/spmv_plus2.csv`. However, we provide a script to regenerate this CSV
 from the Capstan cycle-accurate simulator
-(tungsten)[https://github.com/acrucker/tungsten]. To regenerate the CSV,
+[tungsten](https://github.com/acrucker/tungsten). To regenerate the CSV,
 follow the following steps.
 
 Again in the directory ```scripts/bench-scripts/``` run:
