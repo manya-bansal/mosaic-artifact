@@ -8,9 +8,9 @@ run-tblis-tests:
 	$(PATH_TO_MOSAIC_ARTIFACT)/mosaic/build/bin/taco-test tblis
 
 all-benchmarks: run-fig13 draw-fig13 run-fig14 draw-fig14 run-fig15 draw-fig15 \
-	 run-fig14 draw-fig14 run-fig16 draw-fig16 run-fig17 draw-fig17 \
-	 run-fig18 draw-fig18 run-fig19 draw-fig19 run-fig20 draw-fig20 \
-	 run-fig21 draw-fig21 run-fig22
+	 run-fig16 draw-fig16 run-fig17 draw-fig17 \
+	 run-fig18 draw-fig18 run-fig19 draw-fig19 \
+	 run-fig20 draw-fig20 run-fig21 draw-fig21 run-fig22
 
 kick-tires: run-unit-test run-fig18 draw-fig18
 
@@ -20,7 +20,6 @@ run-unit-test:
 # Each of these scripts inlcudes a list of systems that the benchmark runs in.
 # Please change the list of systems to correspond with the systems that are
 # currently downloaded on your computer.
-
 
 run-fig13:
 	./gemv/bench.sh
