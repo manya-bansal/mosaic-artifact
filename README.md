@@ -10,17 +10,28 @@ The Mosaic compiler extends functionally described in the [TACO](https://github.
 
 **For artifact evaluation, we highly recommend reviewers to use the provided
 login to our AWS instance. This machine has access to the GPU used in the paper
-and we have pre-built all external software libraries.**
+and we pre-built all external software libraries.**
 
-If you would like to run this artifact using Docker, please refer to [these instructions](docker.md)
+If you would like to run this artifact using Docker, please refer to [these instructions](docker.md).
+
+### Testing basic functionality
+
+To ensure that the artifact is functional please run
+
+  ```
+  make kick-tires
+  ```
+
+This script will run all unit tests associated with the Mosaic compiler and checks our system can successfully link against all the external libraries that were used in the evaluation. Further, it runs the `MMAdd` benchmark (Figure 18) to completion and tests the benchmarking and the graph generation code.
+
 
 ## Top-Level Script
-### [5 human minutes + compute hours]
+### [5 human minutes + ~ 60 compute hours]
 
 To run all benchmarks for all systems mentioned in the paper, in the directory ```mosaic/bench/benchmarks/bench-scripts/``` run:
 
   ```
-  make
+  make all-benchmarks
   ```
 
 If you want to specify which benchmarks to run for a particular figure, you can use:
@@ -35,28 +46,46 @@ To make a specific figure (assuming the data has been generated using the previo
   make draw-fig<#>
   ```
 
-For example, if you want to run and draw fig13, you will run ```make run-fig13 && make draw-fig13```.
+For example, if you want to run and draw fig13, you will run ```make run-fig13 && make draw-fig13```. *Please do not run benchmarks in parallel. This will introduce noise, and the graph output may vary. This includes another reviewer who may be running benchmarks on the same machine.*
 
-Breakdown of time to run each benchmark:
+We provide an estimate of how long we expect each benchmark to take:
 
   | Figure # | Benchmark | Time Taken |
-  | ------ | ----- | ----- |
-  | 13 (Page 15)| GEMV | 35 minutes |
-  | 14 (Page 15)| Symmetric GEMV | 35 minutes |
-  | 15 (Page 15)| SpMV | 45 minutes |
-  | 16 (Page 17)| SDDMM with varying sparsity | |
-  | 17 (Page 17)| Block Sparse: 5% non-zeros | minutes |
-  | 18 (Page 17)| SpMMAdd | 2 minutes |
-  | 19 (Page 17)| SDDMM with varying dim | 3 hours 20 minutes |
-  | 20 (Page 17)| Block Sparse: 20% non-zeros | minutes |
-  | 21 (Page 17)| TTV | 3 minutes |
-  | 22 (Page 18)| Compute Capability Language | 1 minute |
+  | :------: | ----- | ----- |
+  | 13 (Page 15)| GEMV | ~3 hours |
+  | 14 (Page 15)| Symmetric GEMV | ~3 hours |
+  | 15 (Page 15)| SpMV | ~5 hours |
+  | 16 (Page 17)| SDDMM with varying sparsity | ~8 hours |
+  | 17 (Page 17)| Block Sparse: 5% non-zeros | ~14 hours  |
+  | 18 (Page 17)| SpMMAdd | ~30 minutes |
+  | 19 (Page 17)| SDDMM with varying dim | ~8 hours |
+  | 20 (Page 17)| Block Sparse: 20% non-zeros | ~12 hours |
+  | 21 (Page 17)| TTV | ~30 minutes |
+  | 22 (Page 18)| Compute Capability Language | ~1 minute |
 
-**However, if you are on your local machine, and not on the AWS machine, you can only run benchmarks that are compatible for your system. In this case, you will need to specify which external functions can be target.** 
-
-To specify which functions to target:
+**However, if you are on your local machine, and not on the AWS machine, you can only run benchmarks that are compatible for your system. In this case, you will need to specify which external functions to target. More instructions [here](docker.md).** 
 
 ## Validate Results
+
+To move the figures over to your local machine for viewing, please run:
+
+  ```
+    scp -r <username>@<host>:/home/reviewer/scripts/bench-scripts/figs <path_on_local_machine>
+  ```
+
+  - Validate that `fig13.pdf` matches Figure 13 on page 15.
+  - Validate that `fig14.pdf` matches Figure 14 on page 15.
+  - Validate that `fig15.pdf` matches Figure 15 on page 15.
+  - Validate that `fig16.pdf` matches Figure 16 on page 17.
+  - Validate that `fig17.pdf` matches Figure 17 on page 17.
+  - Validate that `fig18.pdf` matches Figure 18 on page 17.
+  - Validate that `fig19.pdf` matches Figure 19 on page 17.
+  - Validate that `fig20.pdf` matches Figure 20 on page 17.
+  - Validate that `fig21.pdf` matches Figure 21 on page 17.
+  - Validate that the output of `make run-fig22` matches Table 22. Please note since this benchmark performs a random search, one can expect to see a variance of 2-4 seconds for long running searches.
+
+
+ Note for `fig18.pdf`: While preparing the artifact, we discovered a small bug in our code which has been brought to the Artifact Evaluation Chairs. The graph that is produced draws both lines, the buggy implementation and the corrected version. 
 
 ## Reusing the Artifact Beyond the Paper 
 
@@ -64,7 +93,7 @@ Please note that all active development beyond this paper is located in the [mos
 
 ### Adding new external functions.
 
-Each external function is included like a library with a ```.h``` file. To add external functions to Mosaic, users need to define a class with provides both the imperitive algorithm for code generation and the semantics of the function. Example headers are implemented in the ```mosaic/include/taco/accelerator_interface``` directory.
+Each external function is included like a library with a ```.h``` file. To add external functions to Mosaic, users need to define a class that provides both the imperative algorithm for code generation and the semantics of the function. Example headers are implemented in the ```mosaic/include/taco/accelerator_interface``` directory.
 
 To demonstrate how to plug-in new functions to Mosaic, we walk through the process of adding new external functions. To make our discussion concrete, we consider an example of the [CBLAS](https://www.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top/blas-and-sparse-blas-routines.html) library, in particular the [```cblas_saxpy```](https://www.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top/blas-and-sparse-blas-routines/blas-routines/blas-level-1-routines-and-functions/cblas-axpy.html#cblas-axpy) function. The ```cblas_saxpy``` function computes the sum of a vector-scalar product and another vector, and has the interface:
 
@@ -122,7 +151,7 @@ bool checkerFunction(IndexStmt stmt) const override{return true;}
 
 ### Scheduling a call to cblas_saxpy.
 
-To ```map``` or  ```bind``` a call to the ```Saxpy``` functions, use the ```accelerate``` (aliased) scheduling command. Note that the ```accelerate``` command is overloaded to provide the functionality of both the ```bind``` and ```map``` . The ```bind``` functionality is implicitly included because we do not overwrite previously applied scheduling command.
+To ```map``` or  ```bind``` a call to the ```Saxpy``` functions, use the ```accelerate``` (aliased) scheduling command. Note that the ```accelerate``` command is overloaded to provide the functionality of both the ```bind``` and ```map``` command. The ```bind``` functionality is implicitly included because we do not overwrite previously applied scheduling command.
 
 To see examples of using this command, refer to ```test/tests-interface.cpp```. A call to ```Saxpy``` has been scheduled at `line 132` of the test.
 
@@ -141,18 +170,7 @@ Here, we provide pointers to places in the code that implement key functionality
 
 ## Misc Notes for Manya: DO BEFORE SUBMITTING ARTIFACT
 
-Set flags to:
-
-```
-set(C_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -Woverloaded-virtual -pedantic-errors -Wno-deprecated")
-```
-
-Benchmark suite complains if ```-Wmissing-declarations ``` is added.
-
-Make sure line numbers of code match if changes have been made to the Mosaic code base + double check that the locations match.
-
 Remove any git identification info from reviewer aws machine.
-
 
 
 
