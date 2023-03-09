@@ -16,7 +16,7 @@ and we pre-built all external software libraries.**
 
 If a non-reviewer would like to run this artifact using Docker, please refer to [these instructions](DOCKER.md).
 
-### Kick-the-Tires Test
+### Kick-the-Tires Test[5 human minutes + ~ 30 compute minutes]
 
 To ensure that the artifact is functional please run
 
@@ -67,7 +67,7 @@ We provide an estimate of how long we expect each benchmark to take:
 
 **However, if you are on your local machine, and not on the AWS machine, you can only run benchmarks that are compatible for your system. In this case, you will need to specify which external functions to target. More instructions [here](DOCKER.md).** 
 
-### Running Stardust (Optional) [XX human-minutes + 120 compute-minutes]
+### Running Stardust (Optional) [10 human-minutes + 2 hours]
 We have already provided the numbers for running the SpMV (figure 15 on page 15) and SpMMAdd (figure 18 on page 17)
 kernels on the Capstan hardware using the Stardust compiler (orange y's) in
 FIXME: `spmv_plus2.csv`. However, we provide a script to regenerate this csv
@@ -188,13 +188,3 @@ Here, we provide pointers to places in the code that implement key functionality
 3. Defintion of the function capability language, aliased as ```DynamicStmt``` in the code: ```mosaic/include/taco/accelerator-notation.h``` and corresponding implementation in ```accelerator_notation.cpp``` located in the ```taco/mosaic/src``` directory.
 4. Key search generation and checking: ```mosaic/include/taco/accelerator_search.h``` and the corresponding implementation in ```accelerator_search.cpp``` located in the ```mosaic/src/accelerator_notation``` directory. There are also additional mathematical rewrite functions in ```index_notation.cpp```.
 5. Scheduling commands: ```mosaic/include/taco/index_notation.h``` and the corresponding implementation in ```index_notation.cpp``` located in the ```mosaic/src/index_notation``` directory.
-
-
-## Misc Notes for Manya: DO BEFORE SUBMITTING ARTIFACT
-
-Remove any git identification info from reviewer aws machine.
-
-
-
-
-
