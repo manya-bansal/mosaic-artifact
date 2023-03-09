@@ -78,7 +78,7 @@ We provide an estimate of how long we expect each benchmark to take:
   | 21 (Page 17)| TTV | ~30 minutes |
   | 22 (Page 18)| Compute Capability Language | ~1 minute |
 
-**However, if you are on your local machine, and not on the AWS machine, you can only run benchmarks that are compatible for your system. In this case, you will need to specify which external functions to target. More instructions [here](DOCKER.md).** 
+**However, if you are on your local machine, and not on the AWS machine, you can only run benchmarks that are compatible for your system. In this case, you will need to specify which external functions to target. More instructions [here](docker.md).** 
 
 ### Running Stardust (Optional) [10 human-minutes + 8 hours]
 We have already provided the numbers for running the SpMV (figure 15 on page 15) and SpMMAdd (figure 18 on page 17)
