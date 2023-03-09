@@ -58,11 +58,11 @@ We provide a list of known issues. Please note that this list may be not compreh
 
 | Library | Known Issues | Download Instructions | Time Taken to Complete |
 | ------ | ------ | ------ | ------ |
-| CBLAS                   | Will need to include \<Accelerate/Accelerate.h\> on Macs. | For ubuntu: ```sudo apt-get install openblas``` | 5 minutes|
-| MKL + AVX               | M1 machines will emulate these functions and performance suffers.| For ubuntu: ```sudo apt-get install libmkl-dev libmkl-avx2``` | 5 minutes |
-| TBLIS                   | Could not successfully compile with clang. | ```./scripts/tblis_download.sh``` | 20 Minutes|
+| CBLAS                   | Will need to include \<Accelerate/Accelerate.h\> on Macs | For ubuntu: ```sudo apt-get install openblas``` | 5 minutes|
+| MKL + AVX               | M1 machines will emulate these functions and performance suffers| For ubuntu: ```sudo apt-get install libmkl-dev libmkl-avx2``` | 5 minutes |
+| TBLIS                   | Could not successfully compile with clang | ```./scripts/tblis_download.sh``` | 20 Minutes|
 | GSL + Tensor  Extension + (optional) ATLAS || ```./scripts/gsl_download.sh``` | 4 minutes (GSL) + 2 minutes (Tensor Extension) + (optional ~8 hours ATLAS)|
-| AVX | On x86 machines only.| | Should be downloaded with MKL. |
+| AVX | On x86 machines only| | Should be downloaded with MKL|
 
 
 Please note that we provide the quickest build for ATLAS without any additional
