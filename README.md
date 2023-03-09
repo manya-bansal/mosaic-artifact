@@ -131,12 +131,21 @@ Please note that all active development beyond this paper is located in the [mos
 
 Each external function is included like a library with a ```.h``` file. To add external functions to Mosaic, users need to define a class that provides both the imperative algorithm for code generation and the semantics of the function. Example headers are implemented in the ```mosaic/include/taco/accelerator_interface``` directory.
 
-To demonstrate how to plug-in new functions to Mosaic, we walk through the process of adding new external functions. To make our discussion concrete, we consider an example of the [CBLAS](https://www.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top/blas-and-sparse-blas-routines.html) library, in particular the [```cblas_saxpy```](https://www.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top/blas-and-sparse-blas-routines/blas-routines/blas-level-1-routines-and-functions/cblas-axpy.html#cblas-axpy) function. The ```cblas_saxpy``` function computes the sum of a vector-scalar product and another vector, and has the interface:
+To demonstrate how to plug-in new functions to Mosaic, we walk through the
+process of adding new external functions. To make our discussion concrete, we
+consider an example of the
+[CBLAS](https://www.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top/blas-and-sparse-blas-routines.html)
+library, in particular the
+[```cblas_saxpy```](https://www.intel.com/content/www/us/en/develop/documentation/onemkl-developer-reference-c/top/blas-and-sparse-blas-routines/blas-routines/blas-level-1-routines-and-functions/cblas-axpy.html#cblas-axpy)
+function. The ```cblas_saxpy``` function computes the sum of a vector-scalar
+product and another vector, and has the interface:
 
 ```void cblas_saxpy (const MKL_INT n, const float a, const float *x, const MKL_INT incx, float *y, const MKL_INT incy);```
 
 
-For simplicity, we only consider the case where our scalar is 1 i.e. ```cblas_saxpy``` computes the sum of two vectors. In einsum notation, the semantics of the ```cblas_saxpy``` are given by: ```Y(i) = X(i) + Y(i)```.
+For simplicity, we only consider the case where our scalar is 1 i.e.
+```cblas_saxpy``` computes the sum of two vectors. In einsum notation, the
+semantics of the ```cblas_saxpy``` are given by: ```Y(i) = X(i) + Y(i)```.
 
 The arguments to the ```cblas_saxpy``` function are given by:
 
@@ -147,14 +156,23 @@ The arguments to the ```cblas_saxpy``` function are given by:
 5. ```const float *y```: Pointer to storage of ```Y```.
 6. ```const MKL_INT incy```: Stride to access next element of ```Y```.
 
-Now, to define the external function interface (as defined in Section 3), first we must first define a class that inherits from the pure virtual ```AbstractFunctionInterface``` class defined in ```mosaic/includes/accel-interface.h```. We elide some details to keep our discussion short, but to look at the complete definition, refer to the ```Saxpy``` class defined in ```mosaic/include/accelerator_interface/cblas_interface.h```.
+Now, to define the external function interface (as defined in Section 3), first
+we must first define a class that inherits from the pure virtual
+```AbstractFunctionInterface``` class defined in
+```mosaic/include/taco/accelerator_notation/accel_interface.h```. We elide some details to keep our
+discussion short, but to look at the complete definition, refer to the
+```Saxpy``` class defined in
+```mosaic/include/taco/accelerator_interface/cblas_interface.h```.
 
 First, we define the semantic description of the functions:
 
 ```
     taco::AcceleratorStmt getStmt() const override{ return x(i) = x(i) + y(i);}
 ```
-Here, ```x``` and ```y``` are of private variables of type ```TensorObject```. The ```TensorObject``` extends TACO tensors to support dynamic orders. To see an example of writing language capability statements that use dynamic tensors, refer to ```test/tests-accelerate-notation.cpp```.
+Here, ```x``` and ```y``` are of private variables of type ```TensorObject```.
+The ```TensorObject``` extends TACO tensors to support dynamic orders. To see
+an example of writing language capability statements that use dynamic tensors,
+refer to ```mosaic/test/tests-accelerate-notation.cpp```.
 
 Next, we define the arguments of our function:
 
@@ -169,7 +187,10 @@ std::vector<Argument> getArguments() const override
                             new LiteralArg(Datatype(taco::UInt32), 1)};
                         }
 ```
-We use special objects like ```DimArg```, ```LiteralArg```, ```TensorObjectArg``` to pass in tensor metadata and literal arguments. More types of arguments are defined in ```mosaic/include/accelerator_interface/accel_interface.h```.
+We use special objects like ```DimArg```, ```LiteralArg```,
+```TensorObjectArg``` to pass in tensor metadata and literal arguments. More
+types of arguments are defined in
+```mosaic/include/taco/accelerator_notation/accel_interface.h```.
 
 Finally, we define the return type and function name:
 
@@ -183,22 +204,45 @@ Note that we also define a pass through checker function since we do not need to
 bool checkerFunction(IndexStmt stmt) const override{return true;}
 ```
 
-*To see a more complicated example, refer to the ```tblis_interface.h```*. Here, one can note the ```callBefore``` and ```callAfter``` functionality in action. One can also see how library-specific objects can be used as arguments through the use of ```DeclVar```.
+*To see a more complicated example, refer to the ```tblis_interface.h```*.
+Here, one can note the ```callBefore``` and ```callAfter``` functionality in
+action. One can also see how library-specific objects can be used as arguments
+through the use of ```DeclVar```.
 
 ### Scheduling a Call to cblas\_saxpy
 
-To ```map``` or  ```bind``` a call to the ```Saxpy``` functions, use the ```accelerate``` (aliased) scheduling command. Note that the ```accelerate``` command is overloaded to provide the functionality of both the ```bind``` and ```map``` command. The ```bind``` functionality is implicitly included because we do not overwrite previously applied scheduling command.
+To ```map``` or  ```bind``` a call to the ```Saxpy``` functions, use the
+```accelerate``` (aliased) scheduling command. Note that the ```accelerate```
+command is overloaded to provide the functionality of both the ```bind``` and
+```map``` command. The ```bind``` functionality is implicitly included because
+we do not overwrite previously applied scheduling command.
 
-To see examples of using this command, refer to ```test/tests-interface.cpp```. A call to ```Saxpy``` has been scheduled at `line 132` of the test.
+To see examples of using this command, refer to
+```mosiac/test/tests-interface.cpp```. A call to ```Saxpy``` has been scheduled
+at `line 132` of the test.
 
-To schedule a call using the automatic mapper, fist call the ```registerAccelerator``` function with a ```Saxpy```  object passed in as an argument. Next, call ```accelerateOn``` command that chooses a schedule to apply. Because our paper does not select best mapping i.e. we do not auto-tune our mappings, we automatically apply the first schedule.
+To schedule a call using the automatic mapper, fist call the
+```registerAccelerator``` function with a ```Saxpy```  object passed in as an
+argument. Next, call ```accelerateOn``` command that chooses a schedule to
+apply. Because our paper does not select best mapping i.e. we do not auto-tune
+our mappings, we automatically apply the first schedule.
 
 ### Exploring the Code
 
-Here, we provide pointers to places in the code that implement key functionality:
+Here, we provide pointers to places in the code that implement key
+functionality:
 
-1. External Function Interface: ```mosaic/include/taco/accel_interface```.
-2. Code Generation to target the Z3 theorem prover:  ```mosaic/include/taco/code_gen_dynamic_order.h``` and the corresponding implementation in ```code_gen_dynamic_order.cpp``` located in the ```mosaic/src/accelerator_notation``` directory.
-3. Defintion of the function capability language, aliased as ```DynamicStmt``` in the code: ```mosaic/include/taco/accelerator-notation.h``` and corresponding implementation in ```accelerator_notation.cpp``` located in the ```taco/mosaic/src``` directory.
-4. Key search generation and checking: ```mosaic/include/taco/accelerator_search.h``` and the corresponding implementation in ```accelerator_search.cpp``` located in the ```mosaic/src/accelerator_notation``` directory. There are also additional mathematical rewrite functions in ```index_notation.cpp```.
-5. Scheduling commands: ```mosaic/include/taco/index_notation.h``` and the corresponding implementation in ```index_notation.cpp``` located in the ```mosaic/src/index_notation``` directory.
+1. External Function Interface: ```mosaic/include/taco/accelerator_interface```.
+2. Code Generation to target the Z3 theorem prover:
+   ```mosaic/include/taco/code_gen_dynamic_order.h``` and the corresponding
+   implementation in ```mosaic/src/accelerator_notation/code_gen_dynamic_order.cpp```
+3. Defintion of the function capability language, aliased as ```DynamicStmt```
+   in the code: ```mosaic/include/taco/accelerator_notation/accelerator_notation.h``` and
+   corresponding implementation in ```mosaic/src/accelerator_notation.cpp```.
+4. Key search generation and checking:
+   ```mosaic/include/taco/accelerator_notation/accelerate_search.h``` and the corresponding
+   implementation in ```mosaic/src/accelerator_notation/accelerate_search.cpp```. 
+   There are also additional
+   mathematical rewrite functions in ```mosaic/src/index_notation/index_notation.cpp```.
+5. Scheduling commands: ```mosaic/include/taco/index_notation/index_notation.h``` and the
+   corresponding implementation in ```mosaic/src/index_notation/index_notation.cpp```. 
