@@ -47,7 +47,7 @@ RUN mkdir tensor_algebra_systems_src
 
 WORKDIR /mosaic-artifact/scripts
 RUN chmod 777 *
-RUN echo "source mosaic_env_var.sh" >> /root/.bashrc
+RUN echo "source /mosaic-artifact/scripts/mosaic_env_var.sh" >> /root/.bashrc
 
 WORKDIR /mosaic-artifact/mosaic/build
 RUN cmake -DCMAKE_BUILD_TYPE='Release'\
