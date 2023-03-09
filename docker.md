@@ -27,6 +27,10 @@ The following instructions only apply if you are not working on our AWS machine.
 ## Running the Artifact
 Continue on to the [Top-Level Script](README.md#top-level-script) Section in the `README.md`
 
+**However, if you are on your local machine, and not on the AWS machine, you can only run benchmarks that are compatible for your system. In this case, you will need to specify which external functions can be target.** 
+
+To specify which functions to target:
+
 ## Downloading External Functions
  
 ### CPU External Functions

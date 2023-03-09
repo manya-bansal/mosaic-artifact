@@ -22,14 +22,9 @@ RUN apt-get update && \
         cmake \
         texinfo\
         libtool-bin\
-        bzip2\
-        # download intel mkl
-        libmkl-dev\ 
-        libmkl-avx2\
-        # download openblas
-        libopenblas-dev\
-        # download atlas
-        libatlas-base-dev
+        bzip2 \
+        && \
+        pip install numpy scipy pandas
 
 
 
@@ -38,17 +33,10 @@ SHELL ["/bin/bash", "--login", "-c"]
 
 COPY . /mosaic-artifact
 
-
 # Build the Mosaic Compiler
 RUN mkdir /temp
 WORKDIR /mosaic-artifact/mosaic
 RUN mkdir build
-
-WORKDIR /mosaic-artifact/mosaic/build 
-RUN cmake -DCMAKE_BUILD_TYPE='Release'\
-    -DCMAKE_INSTALL_PREFIX="${HOME}"  \
-    -DBENCHMARK_DOWNLOAD_DEPENDENCIES=ON  ../ 
-RUN make
 
 # Set up a directory that will store all the external systems.
 # To actually set up systems, use the scripts provided in 
@@ -56,8 +44,18 @@ RUN make
 WORKDIR /mosaic-artifact
 RUN mkdir tensor_algebra_systems_src
 
-WORKDIR /scripts
+
+WORKDIR /mosaic-artifact/scripts
 RUN chmod 777 *
+RUN echo "source /mosaic-artifact/scripts/mosaic_env_var.sh" >> /root/.bashrc
+
+WORKDIR /mosaic-artifact/mosaic/build
+RUN cmake -DCMAKE_BUILD_TYPE='Release'\
+    -DCMAKE_INSTALL_PREFIX="${HOME}"  \
+    -DBENCHMARK_DOWNLOAD_DEPENDENCIES=ON  ../ 
+RUN make
+
+
 
 
 
