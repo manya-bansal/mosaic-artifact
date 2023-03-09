@@ -238,7 +238,7 @@ functionality:
    implementation in ```mosaic/src/accelerator_notation/code_gen_dynamic_order.cpp```
 3. Defintion of the function capability language, aliased as ```DynamicStmt```
    in the code: ```mosaic/include/taco/accelerator_notation/accelerator_notation.h``` and
-   corresponding implementation in ```mosaic/src/accelerator_notation.cpp```.
+   corresponding implementation in ```mosaic/src/accelerator_notation/accelerator_notation.cpp```.
 4. Key search generation and checking:
    ```mosaic/include/taco/accelerator_notation/accelerate_search.h``` and the corresponding
    implementation in ```mosaic/src/accelerator_notation/accelerate_search.cpp```. 
