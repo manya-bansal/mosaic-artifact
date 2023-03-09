@@ -2,13 +2,15 @@
 
 Repository for Mosaic artifact generation.
 
-## Overview
+### Overview
 
 The Mosaic compiler extends functionally described in the [TACO](https://github.com/tensor-compiler/taco) compiler and is built on top of TACO's implementation.
 
-## Getting Started Guide
+ - Run Experiments:
+    - Kick-the-Tires (5 human-minutes + ~ 30 compute-minutes)
+    - Run Top-Level Script (5 human-minutes + 60 compute-hours)
+ - Validate All Results
 
-### Getting Started with AWS
 
 **For artifact evaluation, we highly recommend reviewers to use the provided
 login to our AWS instance. This machine has access to the GPU used in the paper
@@ -16,7 +18,7 @@ and we pre-built all external software libraries.**
 
 If a non-reviewer would like to run this artifact using Docker, please refer to [these instructions](DOCKER.md).
 
-### Kick-the-Tires Test[5 human minutes + ~ 30 compute minutes]
+### Kick-the-Tires Test[5 human-minutes + ~ 30 compute-minutes]
 
 To ensure that the artifact is functional please run
 
@@ -28,7 +30,7 @@ This script will run all unit tests associated with the Mosaic compiler and chec
 
 
 
-### Top-Level Script [5 human minutes + ~ 60 compute hours]
+### Top-Level Script [5 human-minutes + ~ 60 compute-hours]
 
 To run all benchmarks for all systems mentioned in the paper, in the directory ```mosaic/bench/benchmarks/bench-scripts/``` run:
 
