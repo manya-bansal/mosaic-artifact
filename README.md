@@ -218,7 +218,7 @@ command is overloaded to provide the functionality of both the ```bind``` and
 we do not overwrite previously applied scheduling command.
 
 To see examples of using this command, refer to
-```mosiac/test/tests-interface.cpp```. A call to ```Saxpy``` has been scheduled
+```mosiac/test/test-interface.cpp```. A call to ```Saxpy``` has been scheduled
 at `line 132` of the test.
 
 To schedule a call using the automatic mapper, fist call the
