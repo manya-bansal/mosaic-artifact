@@ -234,7 +234,7 @@ functionality:
 
 1. External Function Interface: ```mosaic/include/taco/accelerator_interface```.
 2. Code Generation to target the Z3 theorem prover:
-   ```mosaic/include/taco/code_gen_dynamic_order.h``` and the corresponding
+   ```mosaic/include/taco/accelerator_notation/code_gen_dynamic_order.h``` and the corresponding
    implementation in ```mosaic/src/accelerator_notation/code_gen_dynamic_order.cpp```
 3. Defintion of the function capability language, aliased as ```DynamicStmt```
    in the code: ```mosaic/include/taco/accelerator_notation/accelerator_notation.h``` and
