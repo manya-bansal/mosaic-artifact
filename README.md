@@ -4,25 +4,32 @@ Repository for Mosaic artifact generation.
 
 ### Overview
 
-The Mosaic compiler extends functionally described in the [TACO](https://github.com/tensor-compiler/taco) compiler and is built on top of TACO's implementation.
+The Mosaic compiler extends functionally described in the
+[TACO](https://github.com/tensor-compiler/taco) compiler and is built on top of
+TACO's implementation.
 
  - Run Experiments:
-    - Kick-the-Tires (5 human-minutes + ~ 30 compute-minutes)
-    - Run Top-Level Script (5 human-minutes + 60 compute-hours)
+    - Getting Started Guide (5 human-minutes + ~30 compute-minutes)
+    - Step-by-Step Instructions (5 human-minutes + ~60 compute-hours)
  - Validate All Results
 
+## Getting Started Guide [5 human-minutes + ~30 compute-minutes]
 
 **For artifact evaluation, we highly recommend reviewers to use the provided
 login to our AWS instance. This machine has access to the GPU used in the paper
 and we pre-built all external software libraries.**
 
-If a non-reviewer would like to run this artifact using Docker, please refer to [these instructions](DOCKER.md).
+We have provided login instructions to three AWS instances in the bidding
+instructions for the artifact evaluation.
 
-### Kick-the-Tires Test[5 human-minutes + ~ 30 compute-minutes]
+If a non-reviewer would like to run this artifact using Docker, please refer to
+[these instructions](DOCKER.md).
 
+### Kick-the-Tires Test 
 To ensure that the artifact is functional please run
 
   ```
+  cd scripts/bench-scripts
   make kick-tires
   ```
 
@@ -30,9 +37,13 @@ This script will run all unit tests associated with the Mosaic compiler and chec
 
 
 
-### Top-Level Script [5 human-minutes + ~ 60 compute-hours]
+## Step-by-Step Instructions [10 human-minutes + ~70 compute-hours]
+The step-by-step instructions include two sections:
+1. Running a [Top-Level Script](#top-level-script) [5 human-minutes + ~60 compute-hours]
+2. Regenerating the [Stardust](#running-stardust) CSV (which is optional) [5 human-minutes + ~8 compute-hours]
 
-To run all benchmarks for all systems mentioned in the paper, in the directory ```mosaic/bench/benchmarks/bench-scripts/``` run:
+### Top-Level Script [5 human-minutes + ~70 compute-hours]
+To run all benchmarks for all systems mentioned in the paper, in the directory ```scripts/bench-scripts/``` run:
 
   ```
   make all-benchmarks
@@ -69,14 +80,15 @@ We provide an estimate of how long we expect each benchmark to take:
 
 **However, if you are on your local machine, and not on the AWS machine, you can only run benchmarks that are compatible for your system. In this case, you will need to specify which external functions to target. More instructions [here](DOCKER.md).** 
 
-### Running Stardust (Optional) [10 human-minutes + 2 hours]
+### Running Stardust (Optional) [10 human-minutes + 8 hours]
 We have already provided the numbers for running the SpMV (figure 15 on page 15) and SpMMAdd (figure 18 on page 17)
 kernels on the Capstan hardware using the Stardust compiler (orange y's) in
-FIXME: `spmv_plus2.csv`. However, we provide a script to regenerate this csv
-from the Capstan cycle-accurate simulator tungsten. To regenerate the CSV,
+`mosaic-benchmarks/stardust-runs/spmv_plus2.csv`. However, we provide a script to regenerate this CSV
+from the Capstan cycle-accurate simulator
+(tungsten)[https://github.com/acrucker/tungsten]. To regenerate the CSV,
 follow the following steps.
 
-Again in the directory ```mosaic/bench/benchmarks/bench-scripts/``` run:
+Again in the directory ```scripts/bench-scripts/``` run:
 ```
 make stardust-csv
 ```
