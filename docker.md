@@ -66,10 +66,10 @@ We provide a list of known issues. Please note that this list may be not compreh
 
 
 Please note that we provide the quickest build for ATLAS without any additional
-passed in using sudo apt-install. We provide an ```atlas_download.sh``` script
+passed in using ```sudo apt-install libatlas-base-dev```. We provide an ```atlas_download.sh``` script
 that can be used to link against the tuned version. To run this and download
 GSL again, uncomment the ```./atlas_download.sh``` line in
-```./gsl_download.sh```.
+```scripts/gsl_download.sh```.
 
 
 ### Linking External Functions
@@ -80,7 +80,7 @@ To link against the systems that were downloaded, you will need to modify the va
 
 - To add the path for the headers of the library, modify the ```INCLUDE_PATH``` variable.
 - To add the path for the shared object file of the library, modify the ```LIB_PATH``` variable. To add this path to the runtime linking path, use the ```-Wl-R``` flag. Modify the ```DYNAMIC_LIB_FILES``` variable to actually link against the library.
-- To add the ```#include \<header\>.h``` to the code that Mosaic generates, modify the ```INCLUDE_HEADERS``` variable.
+- To add the ```#include <header>.h``` to the code that Mosaic generates, modify the ```INCLUDE_HEADERS``` variable.
 
 
 
