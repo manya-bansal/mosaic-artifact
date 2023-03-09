@@ -177,7 +177,7 @@ To ```map``` or  ```bind``` a call to the ```Saxpy``` functions, use the ```acce
 
 To see examples of using this command, refer to ```test/tests-interface.cpp```. A call to ```Saxpy``` has been scheduled at `line 132` of the test.
 
-To schedule a call using the automatic mapper, fist call the ```registerAccelerator``` function with a ```Saxpy```  object passed in as an argument. Next, call ```accelerateOn``` command that chooses a schedule to apply. Because our paper does not select best mapping i.e. we do not auto-tune our mappings, the ```accelerateOn``` function applies the first schedule.
+To schedule a call using the automatic mapper, fist call the ```registerAccelerator``` function with a ```Saxpy```  object passed in as an argument. Next, call ```accelerateOn``` command that chooses a schedule to apply. Because our paper does not select best mapping i.e. we do not auto-tune our mappings, we automatically apply the first schedule.
 
 ### Exploring the Code
 
