@@ -123,9 +123,11 @@ To move the figures over to your local machine for viewing, please run:
   - Validate that `fig19.pdf` matches the trends in Figure 19 on page 17.
   - Validate that `fig20.pdf` matches the trends in Figure 20 on page 17.
   - Validate that `fig21.pdf` matches the trends in Figure 21 on page 17.
-  - Validate that the output of `make run-fig22` matches Table 22. Please note since this benchmark performs a random search, one can expect to see a variance of up to 10 seconds for long running searches. We are running on a new machine, so we expect to see some variance (due to machine noise and machine state) in the runtimes of each figure (13-21), but the trends should still match.
+  - Validate that the output of `make run-fig22` matches Table 22. Please note since this benchmark performs a random search, one can expect to see a variance of up to 10 seconds for long running searches. 
+ 
+We are running on a new machine, so we expect to see some variance (due to machine noise and machine state) in the runtimes of each figure (13-21), but the trends should still match.
 
- Note for `fig18.pdf`: While preparing the artifact, we discovered a small bug in our code which has been brought to the Artifact Evaluation Chairs. The graph that is produced draws both lines, the buggy implementation and the corrected version. 
+Note for `fig18.pdf`: While preparing the artifact, we discovered a small bug in our code which has been brought to the Artifact Evaluation Chairs. The graph that is produced draws both lines, the buggy implementation and the corrected version. 
 
 ## Reusing the Artifact Beyond the Paper 
 
