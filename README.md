@@ -114,20 +114,16 @@ To move the figures over to your local machine for viewing, please run:
     scp -r <username>@<host>:/home/reviewer/scripts/bench-scripts/figs <path_on_local_machine>
   ```
 
-  - Validate that `fig13.pdf` matches Figure 13 on page 15.
-  - Validate that `fig14.pdf` matches Figure 14 on page 15.
-  - Validate that `fig15.pdf` matches Figure 15 on page 15.
-  - Validate that `fig16.pdf` matches Figure 16 on page 17.
-  - Validate that `fig17.pdf` matches Figure 17 on page 17.
-  - Validate that `fig18.pdf` matches Figure 18 on page 17.
-  - Validate that `fig19.pdf` matches Figure 19 on page 17.
-  - Validate that `fig20.pdf` matches Figure 20 on page 17.
-  - Validate that `fig21.pdf` matches Figure 21 on page 17.
-  - Validate that the output of `make run-fig22` matches Table 22. Please note since this benchmark performs a random search, one can expect to see a variance of up to 10 seconds for long running searches.
-
-We expect to see some variance (due to machine noise and machine state) in the runtimes of each figure (13-21), 
-however, this variance should be small and should not affect the
-conclusions of the figures.
+  - Validate that `fig13.pdf` matches the trends in Figure 13 on page 15.
+  - Validate that `fig14.pdf` matches the trends in Figure 14 on page 15.
+  - Validate that `fig15.pdf` matches the trends in Figure 15 on page 15.
+  - Validate that `fig16.pdf` matches the trends in Figure 16 on page 17.
+  - Validate that `fig17.pdf` matches the trends in Figure 17 on page 17.
+  - Validate that `fig18.pdf` matches the trends in Figure 18 on page 17.
+  - Validate that `fig19.pdf` matches the trends in Figure 19 on page 17.
+  - Validate that `fig20.pdf` matches the trends in Figure 20 on page 17.
+  - Validate that `fig21.pdf` matches the trends in Figure 21 on page 17.
+  - Validate that the output of `make run-fig22` matches Table 22. Please note since this benchmark performs a random search, one can expect to see a variance of up to 10 seconds for long running searches. We are running on a new machine, so we expect to see some variance (due to machine noise and machine state) in the runtimes of each figure (13-21), but the trends should still match.
 
  Note for `fig18.pdf`: While preparing the artifact, we discovered a small bug in our code which has been brought to the Artifact Evaluation Chairs. The graph that is produced draws both lines, the buggy implementation and the corrected version. 
 
