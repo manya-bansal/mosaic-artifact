@@ -127,7 +127,7 @@ To move the figures over to your local machine for viewing, please run:
  
 We are running on a new machine, so we expect to see some variance (due to machine noise and machine state) in the runtimes of each figure (13-21), but the trends should still match.
 
-Note for `fig18.pdf`: While preparing the artifact, we discovered a small bug in our code which has been brought to the Artifact Evaluation Chairs. The graph that is produced draws both lines, the buggy implementation and the corrected version. 
+Note for `fig18.pdf`: While preparing the artifact, we discovered a small bug in our code which has been brought to the attention of the Artifact Evaluation Chairs. The graph that is produced draws both lines, the buggy implementation and the corrected version. 
 
 ## Reusing the Artifact Beyond the Paper 
 
