@@ -68,20 +68,20 @@ To make a specific figure (assuming the data has been generated using the previo
 For example, if you want to run and draw fig13, you will run ```make run-fig13
 && make draw-fig13```.
  
-We provide an estimate of how long we expect each benchmark to take:
+We provide an estimate of how long we expect each benchmark to take (--> indicates the updated values in the final camera-ready version of the paper):
 
   | Figure # | Benchmark | Time Taken |
   | :------: | ----- | ----- |
-  | 13 (Page 15)| GEMV | ~3 hours |
-  | 14 (Page 15)| Symmetric GEMV | ~3 hours |
-  | 15 (Page 15)| SpMV | ~5 hours |
-  | 16 (Page 17)| SDDMM with varying sparsity | ~8 hours |
-  | 17 (Page 17)| Block Sparse: 5% non-zeros | ~14 hours  |
-  | 18 (Page 17)| SpMMAdd | ~30 minutes |
-  | 19 (Page 17)| SDDMM with varying dim | ~8 hours |
-  | 20 (Page 17)| Block Sparse: 20% non-zeros | ~12 hours |
-  | 21 (Page 17)| TTV | ~30 minutes |
-  | 22 (Page 18)| Compute Capability Language | ~1 minute |
+  | 13 --> 12 (Page 15 --> 16)| GEMV | ~3 hours |
+  | 14 --> 13 (Page 15 --> 16)| Symmetric GEMV | ~3 hours |
+  | 15 --> 14 (Page 15 --> 16)| SpMV | ~5 hours |
+  | 16 --> 16 (Page 17 --> 18)| SDDMM with varying sparsity | ~8 hours |
+  | 17 --> 17 (Page 17 --> 18)| Block Sparse: 5% non-zeros | ~14 hours  |
+  | 18 --> 18 (Page 17 --> 18)| SpMMAdd | ~30 minutes |
+  | 19 --> 19 (Page 17 --> 18)| SDDMM with varying dim | ~8 hours |
+  | 20 --> 20 (Page 17 --> 18)| Block Sparse: 20% non-zeros | ~12 hours |
+  | 21 --> 21 (Page 17 --> 18)| TTV | ~30 minutes |
+  | 22 --> 23 (Page 18 --> 19)| Compute Capability Language | ~1 minute |
 
 **However, if you are on your local machine, and not on the AWS machine, you can only run benchmarks that are compatible for your system. In this case, you will need to specify which external functions to target. More instructions [here](docker.md).** 
 
