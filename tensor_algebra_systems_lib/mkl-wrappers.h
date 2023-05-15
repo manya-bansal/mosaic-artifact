@@ -3,13 +3,15 @@
 
 #include "mkl.h"
 
-void sgemm_mkl_internal(int dim, float * A_vals, float * b_vals, float * d_vals){
+void sgemm_mkl_internal(int m, int n, int k,  float * A_vals, float * b_vals, float * d_vals){
 
-    MKL_INT dimA = dim;
+    MKL_INT dimm = m;
+    MKL_INT dimn = n;
+    MKL_INT dimk = k;
     float alpha = 1;
     float beta = 0;
 
-    sgemm("n", "n", &dimA, &dimA, &dimA, &alpha, A_vals, &dimA, b_vals, &dimA, &beta, d_vals, &dimA);
+    sgemm("n", "n", &dimm, &dimn, &dimk, &alpha, A_vals, &dimm, b_vals, &dimk, &beta, d_vals, &dimm);
 }
 
 void ssymv_mkl_internal(int dim, float * A_vals, float * b_vals, float * d_vals){
