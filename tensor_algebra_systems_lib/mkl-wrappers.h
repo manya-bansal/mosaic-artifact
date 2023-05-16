@@ -101,4 +101,22 @@ void wrapper_convert(int m, taco_tensor_t * A, taco_tensor_t * B, float * C){
     free(CSR_A->indices[1][0]);
 }
 
+void mkl_scsrgemv_internal(int m, taco_tensor_t * A, taco_tensor_t * b, taco_tensor_t * c){
+    sparse_matrix_t A_csr;
+    struct matrix_descr desc;
+    desc.type = SPARSE_MATRIX_TYPE_GENERAL;
+    int*  A_pos = (int*)(A->indices[1][0]);
+    mkl_sparse_s_create_csr(&A_csr, SPARSE_INDEX_BASE_ZERO, m, m, A_pos, A_pos+1, (int*)A->indices[1][1], (float*)A->vals);
+    mkl_sparse_s_mv(SPARSE_OPERATION_NON_TRANSPOSE, (float)1, A_csr, desc, (float*)b->vals, (float)0, (float*)c->vals);
+}
+
+void mkl_dcsrgemv_internal(int m, taco_tensor_t * A, taco_tensor_t * b, taco_tensor_t * c){
+    sparse_matrix_t A_csr;
+    struct matrix_descr desc;
+    desc.type = SPARSE_MATRIX_TYPE_GENERAL;
+    int*  A_pos = (int*)(A->indices[1][0]);
+    mkl_sparse_d_create_csr(&A_csr, SPARSE_INDEX_BASE_ZERO, m, m, A_pos, A_pos+1, (int*)A->indices[1][1], (double*)A->vals);
+    mkl_sparse_d_mv(SPARSE_OPERATION_NON_TRANSPOSE, (float)1, A_csr, desc, (double*)b->vals, (float)0, (double*)c->vals);
+}
+
 #endif
