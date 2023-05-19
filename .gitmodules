@@ -7,4 +7,4 @@
 	branch = mosaic-artifact-docker
 [submodule "auto-mosaic"]
 	path = auto-mosaic
-	url = https://github.com/manya-bansal/mosaic-artifact.git
+	url = https://github.com/manya-bansal/auto-mosaic.git
