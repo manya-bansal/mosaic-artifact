@@ -5,3 +5,6 @@
 	path = mosaic
 	url = https://github.com/manya-bansal/mosaic.git
 	branch = mosaic-artifact-docker
+[submodule "auto-mosaic"]
+	path = auto-mosaic
+	url = https://github.com/manya-bansal/mosaic-artifact.git
